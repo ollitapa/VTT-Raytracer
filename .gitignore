@@ -1,0 +1,47 @@
+# Project files ######
+.cproject
+.project
+.settings
+.tags
+.tags_sorted_by_file
+*.sublime-workspace
+.pydevproject
+
+# Build files ######
+build
+Default
+obj
+*.make
+Makefile
+MMP-RayTracer
+*.exe
+*.stackdump
+*.o
+*.bin
+*.pyc
+*.pyo
+__pycache__
+
+# Documentation files #########
+/doc/html
+
+# Datafiles #############
+positions.dat
+Positions.dat
+Positions1.dat
+CubeGeometry.dat
+AllDetector*.txt
+*Slicedata.txt
+*.dll
+*.mat
+ray_paths.txt
+hr_ray_paths.txt
+*.vtp
+*.vtk
+*.stl
+*.json
+*.tmp
+*.dat
+*.hdf5
+*.ray
+*.sre
