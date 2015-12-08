@@ -1,0 +1,80 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 100,
+            "material": "Air",
+            "insideof": "None"
+        },
+        {
+            "name": "Tavara",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "ObjectSTL",
+            "material": "Glass",
+            "insideof": "Air",
+            "filepath": "Part1.stl",
+            "surfaceProperties": [
+                {
+                    "type": "Absorption",
+                    "absorptionCoefficient": 0.2,
+                    "SaveAbsorptionDistribution": false
+                },
+                {
+                    "type": "Isotropic",
+                    "name": "siropinta"
+                }
+            ]
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "Glass",
+            "type": "Clear",
+            "refractiveIndex": 1.5
+        },
+        {
+            "name": "Stuff",
+            "type": "RandomBulkScatter",
+            "refractiveIndex": 1.5,
+            "meanFreePath": 10
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "DirectionalPoint",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 10,
+            "insideOf": "Tavara",
+            "wavelengths": [450],
+            "intensities": [1]
+        }
+    ]
+}

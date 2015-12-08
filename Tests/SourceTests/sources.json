@@ -1,0 +1,80 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 100,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": []
+        },
+        {
+            "name": "Loota1",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Cuboid",
+            "wx": 1,
+            "wy": 2,
+            "wz": 3,
+            "material": "PET",
+            "insideof": "Air"
+        }
+        ,
+        {
+            "name": "Loota2",
+            "location": [
+                10,
+                0,
+                0
+            ],
+            "type": "Cuboid",
+            "wx": 1,
+            "wy": 2,
+            "wz": 6,
+            "material": "PET",
+            "insideof": "Air"
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.1
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "SurfaceNormal",
+            "rays": 10000,
+            "insideOf": "Loota1",
+            "wavelengths": [450],
+            "intensities": [1],
+            "attachedTo": 1
+        },
+        {
+            "name": "Source2",
+            "type": "IsotropicVolume",
+            "rays": 100,
+            "insideOf": "Loota2",
+            "wavelengths": [450],
+            "intensities": [1]
+        }
+    ]
+}

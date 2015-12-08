@@ -1,0 +1,116 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 100,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": []
+        },
+        {
+            "name": "Kartio",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "axialDirection": [
+                0,
+                0,
+                1
+            ],
+            "type": "Cone",
+            "height": 8,
+            "topRadius": 15,
+            "bottomRadius": 10,
+            "material": "PET",
+            "insideof": "Air",
+            "surfaceProperties": [
+                {
+                    "type": "Absorption",
+                    "name": "abs",
+                    "absorptionCoefficient":1,
+                    "SaveAbsorptionDistribution": false
+                },
+                {
+                    "type": "Isotropic",
+                    "name": "siropinta"
+                }
+            ]
+        },
+        {
+            "name": "Loota1",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Cuboid",
+            "wx": 4,
+            "wy": 4,
+            "wz": 2,
+            "material": "PET",
+            "insideof": "Kartio"
+        },
+        {
+            "name": "Pohja",
+            "location": [
+                0,
+                0,
+                -3
+            ],
+            "type": "Cuboid",
+            "wx": 5,
+            "wy": 5,
+            "wz": 3,
+            "material": "PET",
+            "insideof": "Air",
+            "surfaceProperties": [
+
+            ]
+        }
+
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.1
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "IsotropicPoint",
+            "rays": 100,
+            "rayFlux": 10,
+            "insideOf": "Kartio",
+            "wavelengths": [450],
+            "intensities": [1],
+            "location": [
+                1,
+                1,
+                7
+            ],
+            "direction": [
+                0,
+                0,
+                -1
+            ]
+        }
+    ]
+}

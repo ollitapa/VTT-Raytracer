@@ -1,0 +1,64 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 100,
+            "material": "Air",
+            "insideof": "None"
+        },
+        {
+            "name": "Tavara",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "ObjectSTL",
+            "material": "Stuff",
+            "insideof": "Air",
+            "filepath": "Part1.stl"
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "Stuff",
+            "type": "RandomBulkScatter",
+            "refractiveIndex": 1.5,
+            "meanFreePath": 10
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "DirectionalPoint",
+            "location": [
+                0,
+                1,
+                -10
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 100,
+            "insideOf": "Air",
+            "wavelengths": [450],
+            "intensities": [1]
+        }
+    ]
+}

@@ -1,0 +1,98 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 0.01,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": [],
+            "detectors": [
+                {
+                    "type": "AllDetector",
+                    "name": "PallonPintadetektori"
+                }
+            ]
+        },
+        {
+            "name": "Kartio",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "axialDirection": [
+                0,
+                0,
+                1
+            ],
+            "type": "Cone",
+            "height": 3,
+            "topRadius": 13,
+            "bottomRadius": 10,
+            "material": "PET",
+            "insideof": "Air",
+            "surfaceProperties":[
+                            {
+                    "type": "Absorption",
+                    "name": "absooorb",
+                    "absorptionCoefficient": 0.5,
+                    "attachedTo": [2],
+                    "SaveAbsorptionDistribution": true
+                },
+                {
+                    "type": "Isotropic",
+                    "name": "siropinta",
+                    "attachedTo": [2]
+                }]
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.5,
+            "continuousInteractors":[
+            {
+                "type": "BeerLambert",
+                "wavelengths": [300, 600],
+                "attenuation": [1.38629436, 1.38629436], // Attenuation of 0.5 on 0.5 m distance
+                "discretization": 0.2
+
+                }]
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "IsotropicPoint",
+            "location": [
+                0,
+                0,
+                1
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 1,
+            "insideOf": "Kartio",
+            "wavelengths": [450],
+            "intensities": [1.0]
+        }
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 80,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": [],
+            "detectors": [
+                {
+                    "type": "AllDetector",
+                    "name": "PallonPintadetektori"
+                }
+            ]
+        },
+        {
+            "name": "Kartio",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "axialDirection": [
+                0,
+                0,
+                1
+            ],
+            "type": "Cone",
+            "height": 10,
+            "topRadius": 10,
+            "bottomRadius": 3,
+            "material": "PET",
+            "insideof": "Air",
+            "surfaceProperties": [
+                {
+                    "type": "Isotropic",
+                    "name": "siropinta"
+                }
+            ]
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.5
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "DirectionalPoint",
+            "location": [
+                0,
+                5,
+                8
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 1000,
+            "insideOf": "Kartio",
+            "wavelengths": [450],
+            "intensities": [1]
+        }
+    ]
+}

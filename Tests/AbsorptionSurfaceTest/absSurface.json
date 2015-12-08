@@ -1,0 +1,90 @@
+{
+    "general": {
+        "maxIterations": 1000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 20,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": [],
+            "detectors": [
+                {
+                    "type": "AllDetector",
+                    "name": "PallonPintadetektori"
+                }
+            ]
+        },
+        {
+            "name": "Kartio",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "axialDirection": [
+                0,
+                0,
+                1
+            ],
+            "type": "Cone",
+            "height": 3,
+            "topRadius": 13,
+            "bottomRadius": 11,
+            "material": "PET",
+            "insideof": "Air",
+            "surfaceProperties": [
+                {
+                    "type": "Absorption",
+                    "name": "absooorb",
+                    "absorptionCoefficient": 0.5,
+                    "SaveAbsorptionDistribution": true
+                },
+                {
+                    "type": "Isotropic",
+                    "name": "siropinta"
+                }
+            ]
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.5
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "DirectionalPoint",
+            "location": [
+                0,
+                0,
+                1
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 10,
+            "rayFlux": 10,
+            "insideOf": "Kartio",
+            "wavelengths": [450],
+            "intensities":[1]
+        }
+    ]
+}

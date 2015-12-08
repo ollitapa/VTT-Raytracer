@@ -1,0 +1,90 @@
+{
+    "general": {
+        "maxIterations": 10000
+    },
+    "geometry": [
+        {
+            "name": "Air",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "type": "Sphere",
+            "radius": 80,
+            "material": "Air",
+            "insideof": "None",
+            "surfaceProperties": [],
+            "detectors": [
+            ]
+        },
+        {
+            "name": "Kartio",
+            "location": [
+                0,
+                0,
+                0
+            ],
+            "axialDirection": [0,0,1],
+            "type": "Cone",
+            "height": 10,
+            "topRadius":10 ,
+            "bottomRadius":3,
+            "material": "PET",
+            "insideof": "Air",
+            "detectors": [
+                {
+                    "attachedTo": [
+                        1
+                    ],
+                    "name": "zemax",
+                    "type": "ZemaxRayfile",
+                    "includeOnlyNormalDirection": true,
+                    "stopRays":false
+                },
+                 {
+                    "attachedTo": [
+                        1
+                    ],
+                    "name": "lighttools",
+                    "type": "LightToolsRayfile",
+                    "includeOnlyNormalDirection": true,
+                    "stopRays":false
+                }
+                ]
+        }
+    ],
+    "materials": [
+        {
+            "name": "Air",
+            "type": "Clear",
+            "refractiveIndex": 1.0
+        },
+        {
+            "name": "PET",
+            "type": "Clear",
+            "refractiveIndex": 1.5
+        }
+    ],
+    "sources": [
+        {
+            "name": "Source1",
+            "type": "DirectionalPoint",
+            "location": [
+                0,
+                0,
+                -1
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "rays": 1000,
+            "rayFlux": 1,
+            "insideOf": "Air",
+            "wavelengths": [450],
+            "intensities":[1]
+        }
+    ]
+}
