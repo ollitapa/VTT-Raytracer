@@ -1,15 +1,12 @@
 -- hdf5 linking is different in windows and ubuntu
 hdf5_link = "hdf5_serial"
-boost_link =  {"boost_system", "boost_thread"}
 thread_link = "pthread"
 print(os.get())
 if os.get() == "windows" then
   hdf5_link = "hdf5"
-  boost_link =  {"boost_system-mt", "boost_thread-mt"}
 end
 if os.get() == "macosx" then
   hdf5_link = "hdf5"
-  boost_link =  {"boost_system-mt", "boost_thread-mt"}
 end
 
 
