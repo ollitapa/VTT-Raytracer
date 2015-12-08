@@ -26,19 +26,18 @@
 
 using namespace std;
 
-class AllDetector: public SurfaceProperty {
-  public:
-    AllDetector();
-    AllDetector(Json::Value jsonData);
-    virtual ~AllDetector();
-    AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-    virtual void tracerDidEndTracing();
-  private:
-    ofstream _file;
-    static int count;
-    mutex _savingMutex;
+class AllDetector : public SurfaceProperty {
+ public:
+  AllDetector();
+  AllDetector(Json::Value jsonData);
+  virtual ~AllDetector();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
+  virtual void tracerDidEndTracing();
+ private:
+  ofstream _file;
+  static int count;
+  mutex _savingMutex;
 
 };
 

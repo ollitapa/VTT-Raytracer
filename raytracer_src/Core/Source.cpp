@@ -17,12 +17,12 @@
 #include "Source.h"
 
 Source::Source(AbstractGeometry *theEnclosingObject, uint64_t n_rays) {
-    // TODO Auto-generated constructor stub
-    enclosingObject = theEnclosingObject;
-    nRays = n_rays;
-    _raysPerWave = n_rays;
-    _rayIdx = 0;
-    _waveSize = 1;
+  // TODO Auto-generated constructor stub
+  enclosingObject = theEnclosingObject;
+  nRays = n_rays;
+  _raysPerWave = n_rays;
+  _rayIdx = 0;
+  _waveSize = 1;
 }
 
 Source::~Source() {
@@ -30,20 +30,20 @@ Source::~Source() {
 
 void Source::setSpectrum(const vector<double>& wavelengths,
                          const vector<double>& intensities) {
-    this->wavelengths = wavelengths;
-    this->intensities = intensities;
-    _raysPerWave = static_cast<double>(nRays) / wavelengths.size();
-    _waveSize = wavelengths.size();
+  this->wavelengths = wavelengths;
+  this->intensities = intensities;
+  _raysPerWave = static_cast<double>(nRays) / wavelengths.size();
+  _waveSize = wavelengths.size();
 }
 
 void Source::_initialiseRay(Ray& r) {
-    _initMutex.lock();
-    uint64_t i = _rayIdx % _waveSize;
-    r.wavelength = wavelengths[i] / enclosingObject->material->refractiveIndex;
-    r.wavelength_0 = wavelengths[i];
-    r._n_wavepackage = (intensities[i]  / r.wavelength_0) / (_raysPerWave);
-    r.flux = 1.0;
-    _rayIdx++;
-    _initMutex.unlock();
+  _initMutex.lock();
+  uint64_t i = _rayIdx % _waveSize;
+  r.wavelength = wavelengths[i] / enclosingObject->material->refractiveIndex;
+  r.wavelength_0 = wavelengths[i];
+  r._n_wavepackage = (intensities[i] / r.wavelength_0) / (_raysPerWave);
+  r.flux = 1.0;
+  _rayIdx++;
+  _initMutex.unlock();
 }
 

@@ -29,33 +29,31 @@
 
 using namespace std;
 
+class BeerLambertLaw : public ContinuousInteraction {
+ public:
+  BeerLambertLaw(Material* host);
+  BeerLambertLaw(Json::Value jsonData, Material* host);
+  virtual ~BeerLambertLaw();
 
-class BeerLambertLaw: public ContinuousInteraction {
-  public:
-    BeerLambertLaw(Material* host);
-    BeerLambertLaw(Json::Value jsonData, Material* host);
-    virtual ~BeerLambertLaw();
+  /**
+   * This method is called always after the ray has mode a
+   * distance ray.lenght. Superclass should not alter any other parameter
+   * than the flux and wavelength of the ray.
+   */
+  virtual void performContinuousInteraction(Ray& ray);
 
-    /**
-     * This method is called always after the ray has mode a
-     * distance ray.lenght. Superclass should not alter any other parameter
-     * than the flux and wavelength of the ray.
-     */
-    virtual void performContinuousInteraction(Ray& ray);
+  double discretization() const;
+  void setDiscretization(double discretization);
+  const vector<double>& attenuationCoeffs() const;
+  void setAttenuationCoeffs(const vector<double>& attenuationCoeffs);
+  const vector<double>& wavelengths() const;
+  void setWavelengths(const vector<double>& wavelengths);
 
-
-    double discretization() const;
-    void setDiscretization(double discretization);
-    const vector<double>& attenuationCoeffs() const;
-    void setAttenuationCoeffs(const vector<double>& attenuationCoeffs);
-    const vector<double>& wavelengths() const;
-    void setWavelengths(const vector<double>& wavelengths);
-
-  private:
-    double _discretization;
-    vector<double> _wavelengths;
-    vector<double> _attenuationCoeffs;
-    AbsorptionSaver* _absSaver;
+ private:
+  double _discretization;
+  vector<double> _wavelengths;
+  vector<double> _attenuationCoeffs;
+  AbsorptionSaver* _absSaver;
 };
 
 #endif /* RAYTRACER_SRC_MATERIALPROPERTIES_BEERLAMBERTLAW_H_ */

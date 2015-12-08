@@ -27,33 +27,30 @@
 
 using namespace std;
 
-
-
 /**
  * Generates a Zemax readable ray source file for the surface
  * this detector is attached.
  */
-class ZemaxRayfileDetector: public SurfaceProperty {
-  public:
-    ZemaxRayfileDetector(Json::Value jsonData);
-    virtual ~ZemaxRayfileDetector();
-    AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-    virtual void tracerDidEndTracing();
-  private:
-    ofstream _file;
-    static unsigned int _count;
-    unsigned int _rayNum;
-    mutex _savingMutex;
+class ZemaxRayfileDetector : public SurfaceProperty {
+ public:
+  ZemaxRayfileDetector(Json::Value jsonData);
+  virtual ~ZemaxRayfileDetector();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
+  virtual void tracerDidEndTracing();
+ private:
+  ofstream _file;
+  static unsigned int _count;
+  unsigned int _rayNum;
+  mutex _savingMutex;
 
-    string _rayFilename;
-    string _rayTmpFilename;
-    ofstream _rayTmpFile;
-    bool _stopRays;
-    int _includeOnlyNormalDir;
+  string _rayFilename;
+  string _rayTmpFilename;
+  ofstream _rayTmpFile;
+  bool _stopRays;
+  int _includeOnlyNormalDir;
 
-    float _cumulativeRadiantPower;
+  float _cumulativeRadiantPower;
 
 };
 

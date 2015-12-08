@@ -17,21 +17,21 @@
 #include "OblivionSurface.h"
 
 OblivionSurface::OblivionSurface() {
-    // TODO Auto-generated constructor stub
+  // TODO Auto-generated constructor stub
 }
 
 OblivionSurface::~OblivionSurface() {
-    // TODO Auto-generated destructor stub
+  // TODO Auto-generated destructor stub
 }
 
 AbstractGeometry* OblivionSurface::propagateRay(Ray& ray,
-        AbstractGeometry* fromObject) {
-    ray.flux = 0;
-    return (this);
+                                                AbstractGeometry* fromObject) {
+  ray.flux = 0;
+  return (this);
 }
 
 AbstractGeometry* OblivionSurface::receiveRay(Ray& ray, AbstractGeometry* from,
-        AbstractGeometry* to) {
-    ray.flux = 0;
-    return (to);
+                                              AbstractGeometry* to) {
+  ray.flux = 0;
+  return (to);
 }

@@ -16,8 +16,6 @@
 
 #include "UtilityFunctions.h"
 
-
-
 vector<Surface*> findCommonSurfaces(AbstractGeometry* aa,
                                     AbstractGeometry* bb) {
   vector<Surface*> result;
@@ -45,21 +43,21 @@ vector<Surface*> findCommonSurfaces(AbstractGeometry* aa,
   int iB = 0;
 
   for (vector<Surface*>::iterator surf = a->surfaces.begin();
-       surf != a->surfaces.end(); ++surf) {
+      surf != a->surfaces.end(); ++surf) {
     RectSurface* s = dynamic_cast<RectSurface*>(*surf);
     vertex p1 = s->p();
     vertex n1 = s->normal(p1);
     iB = 0;
 
     for (vector<Surface*>::iterator adjSurf = b->surfaces.begin();
-         adjSurf != b->surfaces.end(); ++adjSurf) {
+        adjSurf != b->surfaces.end(); ++adjSurf) {
       RectSurface* adjS = dynamic_cast<RectSurface*>(*adjSurf);
 
       if (adjS == s)
         continue;
 
       vertex p2 = adjS->p();
-      vertex n2  = adjS->normal(p2);
+      vertex n2 = adjS->normal(p2);
       // Check if planes are parallel and
       double up = arma::dot(p2 - p1, n1);
       double down = abs(arma::dot(n1, n2));
@@ -67,8 +65,8 @@ vector<Surface*> findCommonSurfaces(AbstractGeometry* aa,
       if (down == 1 && up == 0) {
         vector<vertex>& verts = s->vertices;
 
-        for (vector<vertex>::iterator vv = verts.begin();
-             vv != verts.end(); ++vv) {
+        for (vector<vertex>::iterator vv = verts.begin(); vv != verts.end();
+            ++vv) {
           Ray r;
           r.location = *vv - n2;
           r.direction = n2;
@@ -100,36 +98,36 @@ vector<Surface*> findCommonSurfacesWithCone(SolidCuboid* a, SolidCone* b) {
   coneTB.push_back(dynamic_cast<CircleSurface*>(b->surfaces[1]));
 
   for (vector<Surface*>::iterator surf = a->surfaces.begin();
-       surf != a->surfaces.end(); ++surf) {
+      surf != a->surfaces.end(); ++surf) {
     RectSurface* s = dynamic_cast<RectSurface*>(*surf);
     vertex p1 = s->p();
     vertex n1 = s->normal(p1);
 
     for (vector<CircleSurface*>::iterator adjSurf = coneTB.begin();
-         adjSurf != coneTB.end(); ++adjSurf) {
+        adjSurf != coneTB.end(); ++adjSurf) {
       CircleSurface* circle = *adjSurf;
-      vertex n2  = circle->normal(circle->center);
+      vertex n2 = circle->normal(circle->center);
       // Check if planes are parallel and
       double up = arma::dot(circle->center - p1, n1);
       double down = abs(arma::dot(n1, n2));
 
       //cout << down << "  " << up << endl;
 
-      if (down == 1 &&  -SMALL_EPSILON < up && up < SMALL_EPSILON) {
+      if (down == 1 && -SMALL_EPSILON < up && up < SMALL_EPSILON) {
         // TODO: All co-planar surfaces are adjacent to circles.
         result.push_back(*surf);
         result.push_back(circle);
         /**
-        for (unsigned int var = 0; var < s->vertices.size(); ++var) {
-            vertex t = s->vertices[var];
-            cout << arma::norm( circle->center - t ) << endl;
-            if(arma::norm( circle->center - t ) <= circle->radius )
-            {
-                result.push_back(*surf);
-                result.push_back(circle);
-                break;
-            }
-        }*/
+         for (unsigned int var = 0; var < s->vertices.size(); ++var) {
+         vertex t = s->vertices[var];
+         cout << arma::norm( circle->center - t ) << endl;
+         if(arma::norm( circle->center - t ) <= circle->radius )
+         {
+         result.push_back(*surf);
+         result.push_back(circle);
+         break;
+         }
+         }*/
       }
 
       // Chek
@@ -179,8 +177,8 @@ string triangulate(vector<vertex>& points) {
   // Write points into file
   ofstream ofile;
   ofile.open("qhulldata.dat.tmp");
-  ofile << "3" << endl; // Dimension for qhull
-  ofile << points.size() << endl; // Number of points for qhull
+  ofile << "3" << endl;  // Dimension for qhull
+  ofile << points.size() << endl;  // Number of points for qhull
 
   // Generate a geometry file out of object
   for (unsigned int i = 0; i < points.size(); i++) {
@@ -194,7 +192,7 @@ string triangulate(vector<vertex>& points) {
   char line[256];
 
   // Run qhull command on external pipe. Triangulates points.
-  if (!(fpipe = (FILE*)popen(command.c_str(), "r"))) {
+  if (!(fpipe = (FILE*) popen(command.c_str(), "r"))) {
     // If fpipe is NULL
     perror("Problems with pipe");
     exit(1);
@@ -214,12 +212,12 @@ string triangulate(vector<vertex>& points) {
     vec v1 = points[v[0]];
     vec v2 = points[v[1]];
     vec v3 = points[v[2]];
-    ss << tab << tab << "vertex " << v1[0] << " " << v1[1]
-       << " " << v1[2] << "\n";
-    ss << tab << tab << "vertex " << v2[0] << " " << v2[1]
-       << " " << v2[2] << "\n";
-    ss << tab << tab << "vertex " << v3[0] << " " << v3[1]
-       << " " << v3[2] << "\n";
+    ss << tab << tab << "vertex " << v1[0] << " " << v1[1] << " " << v1[2]
+        << "\n";
+    ss << tab << tab << "vertex " << v2[0] << " " << v2[1] << " " << v2[2]
+        << "\n";
+    ss << tab << tab << "vertex " << v3[0] << " " << v3[1] << " " << v3[2]
+        << "\n";
     ss << tab << "endloop\n";
     ss << "endfacet\n";
   }
@@ -241,8 +239,7 @@ map<string, AbstractGeometry*> importStl(string& filename) {
 
       if (i != string::npos) {
         string n = line.substr(i + 6);
-        n.erase(remove_if(n.begin(), n.end(), ::isspace),
-                n.end());
+        n.erase(remove_if(n.begin(), n.end(), ::isspace), n.end());
 
         // Find outer loop
         while (getline(f, line)) {
@@ -265,8 +262,8 @@ map<string, AbstractGeometry*> importStl(string& filename) {
             k = line.find("vertex ");
             vertex v3(line.substr(k + 7));
             verts.push_back(v3);
-            getline(f, line); // endloop
-            getline(f, line); // endfacet
+            getline(f, line);  // endloop
+            getline(f, line);  // endfacet
           }
 
           // endsolid
@@ -318,8 +315,7 @@ AbstractGeometry* importSingleStlASCII(string& filename) {
 
       if (i != string::npos) {
         string n = line.substr(i + 6);
-        n.erase(remove_if(n.begin(), n.end(), ::isspace),
-                n.end());
+        n.erase(remove_if(n.begin(), n.end(), ::isspace), n.end());
 
         // Find outer loop
         while (getline(f, line)) {
@@ -342,8 +338,8 @@ AbstractGeometry* importSingleStlASCII(string& filename) {
             k = line.find("vertex ");
             vertex v3(line.substr(k + 7));
             verts.push_back(v3);
-            getline(f, line); // endloop
-            getline(f, line); // endfacet
+            getline(f, line);  // endloop
+            getline(f, line);  // endfacet
           }
 
           // endsolid
@@ -368,16 +364,16 @@ AbstractGeometry* importSingleStlASCII(string& filename) {
 
 AbstractGeometry* importSingleStlBinary(string& filename) {
   /*
-  UINT8[80] � Header
-  UINT32 � Number of triangles
+   UINT8[80] � Header
+   UINT32 � Number of triangles
 
-  foreach triangle
-  REAL32[3] � Normal vector
-  REAL32[3] � Vertex 1
-  REAL32[3] � Vertex 2
-  REAL32[3] � Vertex 3
-  UINT16 � Attribute byte count
-  end
+   foreach triangle
+   REAL32[3] � Normal vector
+   REAL32[3] � Vertex 1
+   REAL32[3] � Vertex 2
+   REAL32[3] � Vertex 3
+   UINT16 � Attribute byte count
+   end
    */
   ifstream f(filename.c_str(), std::ios::in | std::ios::binary);
   string line;
@@ -400,13 +396,12 @@ AbstractGeometry* importSingleStlBinary(string& filename) {
 
     // Check if filesize matches...
     // This determines if it is binary
-    if ((long)filesize(filename.c_str()) != 80 + 4
-        + *triag * 50) {
+    if ((long) filesize(filename.c_str()) != 80 + 4 + *triag * 50) {
       cout << "... not a binary file!" << endl;
-      throw (-1);
+      throw(-1);
     }
 
-    while ((long)f.tellg() != -1) {
+    while ((long) f.tellg() != -1) {
       // Facet normal, not saved
       f.read(vx, sizeof(uint32_t));
       f.read(vy, sizeof(uint32_t));
@@ -415,21 +410,21 @@ AbstractGeometry* importSingleStlBinary(string& filename) {
       f.read(vx, sizeof(uint32_t));
       f.read(vy, sizeof(uint32_t));
       f.read(vz, sizeof(uint32_t));
-      vertex v1 ;
+      vertex v1;
       v1 << float(*vx) << float(*vy) << float(*vz);
       verts.push_back(v1);
       //  vertex v2x v2y v2z
       f.read(vx, sizeof(uint32_t));
       f.read(vy, sizeof(uint32_t));
       f.read(vz, sizeof(uint32_t));
-      vertex v2 ;
+      vertex v2;
       v2 << float(*vx) << float(*vy) << float(*vz);
       verts.push_back(v2);
       //  vertex v3x v3y v3z
       f.read(vx, sizeof(uint32_t));
       f.read(vy, sizeof(uint32_t));
       f.read(vz, sizeof(uint32_t));
-      vertex v3 ;
+      vertex v3;
       v3 << float(*vx) << float(*vy) << float(*vz);
       verts.push_back(v3);
       // Byte count, not used for anythting

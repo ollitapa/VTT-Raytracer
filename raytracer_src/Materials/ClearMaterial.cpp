@@ -17,26 +17,25 @@
 #include "ClearMaterial.h"
 
 ClearMaterial::ClearMaterial() {
-    refractiveIndex = 1.0;
+  refractiveIndex = 1.0;
 }
 
 ClearMaterial::ClearMaterial(double refIndex) {
-    refractiveIndex = refIndex;
+  refractiveIndex = refIndex;
 }
 
 ClearMaterial::ClearMaterial(Json::Value jsonData) {
-    if (jsonData.isMember("refractiveIndex"))
-        refractiveIndex = jsonData["refractiveIndex"].asDouble();
+  if (jsonData.isMember("refractiveIndex"))
+    refractiveIndex = jsonData["refractiveIndex"].asDouble();
 
-    else
-        refractiveIndex = 1.0;
+  else
+    refractiveIndex = 1.0;
 }
-
 
 ClearMaterial::~ClearMaterial() {
 }
 
 void ClearMaterial::interactWithRay(Ray& ray) {
-    ray.length = INFINITY;
+  ray.length = INFINITY;
 }
 

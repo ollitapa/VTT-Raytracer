@@ -22,18 +22,16 @@
 #include <cmath>
 #include "json.h"
 
-class Lambertian: public SurfaceProperty {
-  public:
-    Lambertian();
-    Lambertian(Json::Value jsonData);
+class Lambertian : public SurfaceProperty {
+ public:
+  Lambertian();
+  Lambertian(Json::Value jsonData);
 
-    /**
-     * Random direction for ray is generated.
-     */
-    AbstractGeometry* receiveRay(Ray &ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-
+  /**
+   * Random direction for ray is generated.
+   */
+  AbstractGeometry* receiveRay(Ray &ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
 
 };
 

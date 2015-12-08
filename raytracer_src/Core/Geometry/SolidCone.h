@@ -26,19 +26,19 @@
 #include <armadillo>
 #include "json.h"
 
-class SolidCone: public Solid {
-  public:
-    SolidCone(Json::Value jsonData);
-    virtual ~SolidCone();
+class SolidCone : public Solid {
+ public:
+  SolidCone(Json::Value jsonData);
+  virtual ~SolidCone();
 
-    string stlRepresentation();
+  string stlRepresentation();
 
-  protected:
-    double _topR;
-    double _bottomR;
-    double _height;
-    vertex _axialDirection;
-    vertex _p;
+ protected:
+  double _topR;
+  double _bottomR;
+  double _height;
+  vertex _axialDirection;
+  vertex _p;
 };
 
 #endif /* SOLIDCONE_H_ */

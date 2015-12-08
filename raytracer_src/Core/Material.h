@@ -22,23 +22,21 @@
 #include "Ray.h"
 #include <vector>
 
-
 class Material {
-  public:
-    Material();
-    virtual ~Material();
-    void interactWithRayContinuously(Ray &rayAtEnd);
-    virtual void interactWithRay(Ray &ray);
-    virtual void propagationDistance(Ray &ray);
+ public:
+  Material();
+  virtual ~Material();
+  void interactWithRayContinuously(Ray &rayAtEnd);
+  virtual void interactWithRay(Ray &ray);
+  virtual void propagationDistance(Ray &ray);
 
-    virtual void tracerDidEndTracing();
+  virtual void tracerDidEndTracing();
 
-    void addContinuousInteractor(ContinuousInteraction* actor);
+  void addContinuousInteractor(ContinuousInteraction* actor);
 
-    double refractiveIndex;
-  protected:
-    vector<ContinuousInteraction*> interactors;
+  double refractiveIndex;
+ protected:
+  vector<ContinuousInteraction*> interactors;
 };
-
 
 #endif /* MATERIAL_H_ */

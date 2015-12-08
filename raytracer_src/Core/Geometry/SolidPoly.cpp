@@ -16,23 +16,23 @@
 
 #include "SolidPoly.h"
 
-
-SolidPoly::SolidPoly(vector<vertex> vertices): Solid() {
-    // Create triangle surfaces
-    for (unsigned int i = 0; i < vertices.size(); i += 3) {
-        vertex p = vertices[i];
-        vertex u = vertices[i + 1] - vertices[i];
-        vertex v = vertices[i + 2] - vertices[i];
-        surfaces.push_back(new TriangleSurface(this, p, u, v));
-    }
+SolidPoly::SolidPoly(vector<vertex> vertices)
+    : Solid() {
+  // Create triangle surfaces
+  for (unsigned int i = 0; i < vertices.size(); i += 3) {
+    vertex p = vertices[i];
+    vertex u = vertices[i + 1] - vertices[i];
+    vertex v = vertices[i + 2] - vertices[i];
+    surfaces.push_back(new TriangleSurface(this, p, u, v));
+  }
 }
 
 SolidPoly::~SolidPoly() {
-    // Delete own side surfaces
-    for (std::vector<Surface*>::iterator it = surfaces.begin();
-            it != surfaces.end(); ++it) {
-        delete *it;
-    }
+  // Delete own side surfaces
+  for (std::vector<Surface*>::iterator it = surfaces.begin();
+      it != surfaces.end(); ++it) {
+    delete *it;
+  }
 }
 
 SolidPoly::SolidPoly(Json::Value jsonData) {

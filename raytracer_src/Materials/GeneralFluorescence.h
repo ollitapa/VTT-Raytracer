@@ -29,67 +29,66 @@
 using namespace arma;
 using namespace std;
 
-class GeneralFluorescence: public GeneralScatterer {
-  public:
-    GeneralFluorescence(Json::Value jsonData);
-    virtual ~GeneralFluorescence();
+class GeneralFluorescence : public GeneralScatterer {
+ public:
+  GeneralFluorescence(Json::Value jsonData);
+  virtual ~GeneralFluorescence();
 
+  virtual void interactWithRay(Ray &ray);
 
-    virtual void interactWithRay(Ray &ray);
+  /**
+   * Excitation spectrum wavelengths for each particle type.
+   */
+  vector<vec*> excitationWavelengths;
 
-    /**
-     * Excitation spectrum wavelengths for each particle type.
-     */
-    vector<vec*> excitationWavelengths;
+  /**
+   * Excitation spectrum intensities for each particle type.
+   */
+  vector<vec*> excitationIntensities;
 
-    /**
-     * Excitation spectrum intensities for each particle type.
-     */
-    vector<vec*> excitationIntensities;
+  /**
+   * Number of emission random variables present in
+   * cumulativeEmissionWavelengths. Int for each particle type.
+   */
+  vector<unsigned int> emissionDiscretization;
 
-    /**
-     * Number of emission random variables present in
-     * cumulativeEmissionWavelengths. Int for each particle type.
-     */
-    vector<unsigned int> emissionDiscretization;
+  /**
+   * Inverse cumulative distribution of emission wavelengths for each
+   * particle type. [nm]
+   * The inverse function is used by randomly picking a number between
+   * [0, emissionDiscretization].
+   */
+  vector<vec*> inverseEmissionWavelengthsCDF;
 
-    /**
-     * Inverse cumulative distribution of emission wavelengths for each
-     * particle type. [nm]
-     * The inverse function is used by randomly picking a number between
-     * [0, emissionDiscretization].
-     */
-    vector<vec*> inverseEmissionWavelengthsCDF;
+  /**
+   * Number of fluorescent particles. The fluorescence can contain
+   * non-fluorescent particles appended after the fluorescent ones.
+   */
+  unsigned int numberOfFluorescentParticles;
 
-    /**
-     * Number of fluorescent particles. The fluorescence can contain
-     * non-fluorescent particles appended after the fluorescent ones.
-     */
-    unsigned int numberOfFluorescentParticles;
+  /**
+   * Efficiency of phosphors. [0,1] This is a watt -> watt efficiency and
+   * should not be confused with quantum efficiency.
+   */
+  vector<double> phosphorEfficiencies;
 
-    /**
-     * Efficiency of phosphors. [0,1] This is a watt -> watt efficiency and
-     * should not be confused with quantum efficiency.
-     */
-    vector<double> phosphorEfficiencies;
+ protected:
+  /**
+   * Absorption spectrum wavelengths for each particle type.
+   */
+  vector<vec*> _absorptionWavelengths;
+  /**
+   * Absorption spectrum intensities for each particle type.
+   */
+  vector<vec*> _absorptionIntensities;
+  /**
+   * Fluorescense routine.
+   */
+  void fluorescence(Ray &ray, unsigned int ptype);
 
-  protected:
-    /**
-     * Absorption spectrum wavelengths for each particle type.
-     */
-    vector<vec*> _absorptionWavelengths;
-    /**
-     * Absorption spectrum intensities for each particle type.
-     */
-    vector<vec*> _absorptionIntensities;
-    /**
-     * Fluorescense routine.
-     */
-    void fluorescence(Ray &ray, unsigned int ptype);
-
-    bool _saveAbsorption;
-    AbsorptionSaver* _absSaver;
-    bool _multiFluor;
+  bool _saveAbsorption;
+  AbsorptionSaver* _absSaver;
+  bool _multiFluor;
 };
 
 #endif /* RAYTRACER_SRC_MATERIALS_GENERALFLUORESCENCE_H_ */

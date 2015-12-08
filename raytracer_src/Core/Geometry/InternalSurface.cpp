@@ -35,7 +35,7 @@ InternalSurface::~InternalSurface() {
 }
 
 AbstractGeometry* InternalSurface::propagateRay(Ray& ray,
-        AbstractGeometry* fromObject) {
-    return (receiveRay(ray, parent, parent));
+                                                AbstractGeometry* fromObject) {
+  return (receiveRay(ray, parent, parent));
 }
 

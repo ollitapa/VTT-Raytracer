@@ -22,30 +22,30 @@
 #include "Ray.h"
 #include "json.h"
 
-class DirectionalPointSource: public Source {
-  public:
-    DirectionalPointSource(Solid* theEnclosingObject, uint64_t n_rays);
-    DirectionalPointSource(Json::Value jsonData, Solid* theEnclosingObject);
+class DirectionalPointSource : public Source {
+ public:
+  DirectionalPointSource(Solid* theEnclosingObject, uint64_t n_rays);
+  DirectionalPointSource(Json::Value jsonData, Solid* theEnclosingObject);
 
-    virtual ~DirectionalPointSource();
+  virtual ~DirectionalPointSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed to direction member.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed to direction member.
+   *
+   */
+  virtual Ray generateRay();
 
-    /**
-     * Direction of the rays. It is initialized to positive z-axis.
-     */
-    vertex direction;
+  /**
+   * Direction of the rays. It is initialized to positive z-axis.
+   */
+  vertex direction;
 
-    /**
-     * Location of the source.
-     */
-    vertex location;
+  /**
+   * Location of the source.
+   */
+  vertex location;
 };
 
 #endif /* DIRECTIONALPOINTSOURCE_H_ */

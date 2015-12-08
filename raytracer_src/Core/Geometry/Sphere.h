@@ -26,16 +26,16 @@
 #include "json.h"
 #include "SphericalSurface.h"
 
-class Sphere: public Solid {
-  public:
-    Sphere(vertex theCenter, double theRadius);
-    Sphere(Json::Value jsonData);
-    virtual ~Sphere();
+class Sphere : public Solid {
+ public:
+  Sphere(vertex theCenter, double theRadius);
+  Sphere(Json::Value jsonData);
+  virtual ~Sphere();
 
-    string stlRepresentation();
+  string stlRepresentation();
 
-    vertex center;
-    double radius;
+  vertex center;
+  double radius;
 };
 
 #endif /* SPHERE_H_ */

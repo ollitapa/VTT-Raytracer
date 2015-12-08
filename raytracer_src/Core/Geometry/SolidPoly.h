@@ -28,14 +28,14 @@ using namespace std;
 /**
  * Solid representing irregular shape with triangular facets.
  */
-class SolidPoly: public Solid {
-  public:
-    /**
-     * Constructor with triangular facets
-     */
-    SolidPoly(vector<vertex> vertices);
-    virtual ~SolidPoly();
-    SolidPoly(Json::Value jsonData);
+class SolidPoly : public Solid {
+ public:
+  /**
+   * Constructor with triangular facets
+   */
+  SolidPoly(vector<vertex> vertices);
+  virtual ~SolidPoly();
+  SolidPoly(Json::Value jsonData);
 };
 
 #endif /* SOLIDPOLY_H_ */

@@ -16,19 +16,18 @@
 
 #include "ContinuousInteraction.h"
 
-
 ContinuousInteraction::ContinuousInteraction(Material* host) {
-    _host = host;
+  _host = host;
 }
 
 ContinuousInteraction::~ContinuousInteraction() {
-    // TODO Auto-generated destructor stub
+  // TODO Auto-generated destructor stub
 }
 
 Material* ContinuousInteraction::host() {
-    return _host;
+  return _host;
 }
 
 void ContinuousInteraction::setHost(Material* host) {
-    _host = host;
+  _host = host;
 }

@@ -22,43 +22,39 @@
 #include "json.h"
 #include <cmath>
 
-class ConeSurface: public Surface {
-  public:
-    ConeSurface(AbstractGeometry* theParent,
-                double height,
-                double topR,
-                double bottomR,
-                vertex& axialDirection,
-                vertex& position);
-    virtual ~ConeSurface();
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+class ConeSurface : public Surface {
+ public:
+  ConeSurface(AbstractGeometry* theParent, double height, double topR,
+              double bottomR, vertex& axialDirection, vertex& position);
+  virtual ~ConeSurface();
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-    /**
-     * Location of the bottom cone. Center of the smaller cut segment.
-     */
-    vertex location;
+  /**
+   * Location of the bottom cone. Center of the smaller cut segment.
+   */
+  vertex location;
 
-    virtual vertex& normal(const vertex& distance);
+  virtual vertex& normal(const vertex& distance);
 
-  protected:
-    /*
-     * Direction of the axis of the cone. The cone circumference will
-     * get larger at that direction
-     *
-     * Should be normalized to one.
-     */
-    vertex _axialDirection;
-    double _height;
-    double _halfOpeningAngle;
-    double _bottomR;
-    double _topR;
-    double _heightOfCut;
+ protected:
+  /*
+   * Direction of the axis of the cone. The cone circumference will
+   * get larger at that direction
+   *
+   * Should be normalized to one.
+   */
+  vertex _axialDirection;
+  double _height;
+  double _halfOpeningAngle;
+  double _bottomR;
+  double _topR;
+  double _heightOfCut;
 
-    bool _insideBounds(vertex& intersectPoint);
+  bool _insideBounds(vertex& intersectPoint);
 };
 
 #endif /* CONESURFACE_H_ */

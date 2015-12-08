@@ -33,46 +33,46 @@
 /**
  * Triangular surface with 3 vertices.
  */
-class TriangleSurface: public Surface {
-  public:
-    TriangleSurface(AbstractGeometry* theParent, Json::Value jsonData);
-    TriangleSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
-    TriangleSurface(AbstractGeometry* theParent, vertex position, vertex u,
-                    vertex v);
-    virtual ~TriangleSurface();
+class TriangleSurface : public Surface {
+ public:
+  TriangleSurface(AbstractGeometry* theParent, Json::Value jsonData);
+  TriangleSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
+  TriangleSurface(AbstractGeometry* theParent, vertex position, vertex u,
+                  vertex v);
+  virtual ~TriangleSurface();
 
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-    virtual string stlRepresentation();
+  virtual string stlRepresentation();
 
-    const vertex& u() const;
-    const vertex& v() const;
+  const vertex& u() const;
+  const vertex& v() const;
 
-  protected:
+ protected:
 
-    /**
-     * Spanning vector u. Calculated at creation.
-     */
-    vertex _u;
+  /**
+   * Spanning vector u. Calculated at creation.
+   */
+  vertex _u;
 
-    /**
-     * Spanning vector v. Calculated at creation.
-     */
-    vertex _v;
+  /**
+   * Spanning vector v. Calculated at creation.
+   */
+  vertex _v;
 
-    /**
-     * Normalized _u
-     */
-    vertex _nu;
+  /**
+   * Normalized _u
+   */
+  vertex _nu;
 
-    /**
-     * Normalized _v
-     */
-    vertex _nv;
+  /**
+   * Normalized _v
+   */
+  vertex _nv;
 };
 
 #endif /* TRIANGLESURFACE_H_ */

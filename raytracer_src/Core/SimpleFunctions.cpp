@@ -17,23 +17,20 @@
 #include "SimpleFunctions.h"
 
 ifstream::pos_type filesize(const char* filename) {
-    ifstream in(filename, ifstream::ate | ifstream::binary);
-    ifstream::pos_type s = in.tellg();
-    in.close();
-    return (s);
+  ifstream in(filename, ifstream::ate | ifstream::binary);
+  ifstream::pos_type s = in.tellg();
+  in.close();
+  return (s);
 }
 
 unsigned int findClosestIndex(arma::vec& v, double value) {
-    arma::uword  i;
-    double min_val = arma::abs(v - value).min(i);
-    return (i);
+  arma::uword i;
+  double min_val = arma::abs(v - value).min(i);
+  return (i);
 }
 unsigned int findClosestIndex(arma::vec* v, double value) {
-    arma::uword  i;
-    double min_val = arma::abs(*v - value).min(i);
-    return (i);
+  arma::uword i;
+  double min_val = arma::abs(*v - value).min(i);
+  return (i);
 }
-
-
-
 

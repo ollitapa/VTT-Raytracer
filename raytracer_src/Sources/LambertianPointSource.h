@@ -26,31 +26,31 @@
 
 using namespace std;
 
-class LambertianPointSource: public Source {
-  public:
-    LambertianPointSource(Solid* theEnclosingObject, uint64_t n_rays);
-    LambertianPointSource(Json::Value jsonData, Solid* theEnclosingObject);
+class LambertianPointSource : public Source {
+ public:
+  LambertianPointSource(Solid* theEnclosingObject, uint64_t n_rays);
+  LambertianPointSource(Json::Value jsonData, Solid* theEnclosingObject);
 
-    virtual ~LambertianPointSource();
+  virtual ~LambertianPointSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed to normal direction of the surface and
-     * distributed evenly.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed to normal direction of the surface and
+   * distributed evenly.
+   *
+   */
+  virtual Ray generateRay();
 
-    /**
-     * Direction of the rays. It is initialized to positive z-axis.
-     */
-    vertex direction;
+  /**
+   * Direction of the rays. It is initialized to positive z-axis.
+   */
+  vertex direction;
 
-    /**
-     * Location of the source.
-     */
-    vertex location;
+  /**
+   * Location of the source.
+   */
+  vertex location;
 };
 
 #endif /* LAMBERTIANPOINTSOURCE_H_ */

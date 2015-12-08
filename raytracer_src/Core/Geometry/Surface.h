@@ -32,90 +32,87 @@
 
 using namespace std;
 
-class Surface: public AbstractGeometry {
-  public:
+class Surface : public AbstractGeometry {
+ public:
 
-    Surface(AbstractGeometry* theParent);
-    virtual ~Surface();
+  Surface(AbstractGeometry* theParent);
+  virtual ~Surface();
 
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-    /**
-     * Propagates the ray through this surface.
-     * If this ray has an adjacent surface and the ray is going to that
-     * direction, the propagation is given to that surface by calling
-     * receiveRay() of that surface.
-     *
-     * All receiveRay() of surfacePropreties are performed.
-     *
-     * After receiveRay(), the ray is propagated in the solid it is going to.
-     */
-    virtual AbstractGeometry* propagateRay(Ray &ray,
-                                           AbstractGeometry *fromObject);
+  /**
+   * Propagates the ray through this surface.
+   * If this ray has an adjacent surface and the ray is going to that
+   * direction, the propagation is given to that surface by calling
+   * receiveRay() of that surface.
+   *
+   * All receiveRay() of surfacePropreties are performed.
+   *
+   * After receiveRay(), the ray is propagated in the solid it is going to.
+   */
+  virtual AbstractGeometry* propagateRay(Ray &ray,
+                                         AbstractGeometry *fromObject);
 
-    /**
-     * This method will handle the changes to the ray. Should not propagate
-     * the ray.
-     */
-    virtual AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
-                                         AbstractGeometry* to);
+  /**
+   * This method will handle the changes to the ray. Should not propagate
+   * the ray.
+   */
+  virtual AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
+                                       AbstractGeometry* to);
 
-    /**
-     * Add surface property to this surfaces.
-     */
-    void addProperty(SurfaceProperty* property);
+  /**
+   * Add surface property to this surfaces.
+   */
+  void addProperty(SurfaceProperty* property);
 
-    /**
-     * All neighboring surfaces should be associated here.
-     */
-    void addNeighbour(Surface* newNeighbour);
-    vector<Surface*> _neighbours;
+  /**
+   * All neighboring surfaces should be associated here.
+   */
+  void addNeighbour(Surface* newNeighbour);
+  vector<Surface*> _neighbours;
 
+  /**
+   * Returns the surface normal at given distance.
+   * distance should be on the surface.
+   */
+  virtual vertex& normal(const vertex& distance);
+  const vertex& p() const;
 
-    /**
-     * Returns the surface normal at given distance.
-     * distance should be on the surface.
-     */
-    virtual vertex& normal(const vertex& distance);
-    const vertex& p() const;
+  /**
+   * Tracer calls this method when the tracing has ended.
+   */
+  virtual void tracerDidEndTracing();
 
-    /**
-     * Tracer calls this method when the tracing has ended.
-     */
-    virtual void tracerDidEndTracing();
+ protected:
 
+  vector<SurfaceProperty*> _properties;
 
-  protected:
+  AbstractGeometry* _oblivion;
 
-    vector<SurfaceProperty*> _properties;
+  /**
+   * Surface normal. Length is one.
+   */
+  vertex _normal;
 
-    AbstractGeometry* _oblivion;
+  /**
+   * Position vector for the surface
+   */
+  vertex _p;
 
-    /**
-     * Surface normal. Length is one.
-     */
-    vertex _normal;
+  /**
+   * Hierarchy of the highest surface property attached
+   * to this surface.
+   */
+  int _surf_prop_hierarchy;
 
-    /**
-     * Position vector for the surface
-     */
-    vertex _p;
-
-    /**
-     * Hierarchy of the highest surface property attached
-     * to this surface.
-     */
-    int _surf_prop_hierarchy;
-
-    /**
-     * Default surface property.
-     */
-    SurfaceProperty* _refr;
+  /**
+   * Default surface property.
+   */
+  SurfaceProperty* _refr;
 };
-
 
 #endif /* SURFACE_H_ */

@@ -22,13 +22,13 @@
 #include "Material.h"
 #include "json.h"
 
-class ClearMaterial: public Material {
-  public:
-    ClearMaterial();
-    ClearMaterial(Json::Value jsonData);
-    ClearMaterial(double refIndex);
-    virtual ~ClearMaterial();
-    virtual void interactWithRay(Ray &ray);
+class ClearMaterial : public Material {
+ public:
+  ClearMaterial();
+  ClearMaterial(Json::Value jsonData);
+  ClearMaterial(double refIndex);
+  virtual ~ClearMaterial();
+  virtual void interactWithRay(Ray &ray);
 };
 
 #endif /* CLEARMATERIAL_H_ */

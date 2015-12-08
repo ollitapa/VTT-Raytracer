@@ -16,34 +16,35 @@
 
 #include "Sphere.h"
 
-Sphere::Sphere(vertex theCenter, double theRadius) : Solid() {
-    center = theCenter;
-    radius = theRadius;
-    surfaces.push_back(new SphericalSurface(this, center, radius));
+Sphere::Sphere(vertex theCenter, double theRadius)
+    : Solid() {
+  center = theCenter;
+  radius = theRadius;
+  surfaces.push_back(new SphericalSurface(this, center, radius));
 }
 
 Sphere::~Sphere() {
-    // Delete own side surfaces
-    for (std::vector<Surface*>::iterator it = surfaces.begin();
-            it != surfaces.end(); ++it) {
-        delete *it;
-    }
+  // Delete own side surfaces
+  for (std::vector<Surface*>::iterator it = surfaces.begin();
+      it != surfaces.end(); ++it) {
+    delete *it;
+  }
 }
 
-Sphere::Sphere(Json::Value jsonData) : Solid() {
-    checkRequiredJSONParam(jsonData, "location", this);
-    checkRequiredJSONParam(jsonData, "radius", this);
-    vertex position;
-    Json::Value location = jsonData["location"];
-    position << location[0].asDouble()
-             << location[1].asDouble()
-             << location[2].asDouble();
-    center = position;
-    radius = jsonData["radius"].asDouble();
-    surfaces.push_back(new SphericalSurface(this, center, radius));
+Sphere::Sphere(Json::Value jsonData)
+    : Solid() {
+  checkRequiredJSONParam(jsonData, "location", this);
+  checkRequiredJSONParam(jsonData, "radius", this);
+  vertex position;
+  Json::Value location = jsonData["location"];
+  position << location[0].asDouble() << location[1].asDouble()
+      << location[2].asDouble();
+  center = position;
+  radius = jsonData["radius"].asDouble();
+  surfaces.push_back(new SphericalSurface(this, center, radius));
 }
 
 string Sphere::stlRepresentation() {
-    string stl_snip = "";
-    return (stl_snip);
+  string stl_snip = "";
+  return (stl_snip);
 }

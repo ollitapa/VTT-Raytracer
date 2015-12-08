@@ -30,44 +30,41 @@
 #include <sstream>
 #include "json.h"
 
+class RectSurface : public Surface {
+ public:
+  RectSurface(AbstractGeometry* theParent, Json::Value jsonData);
+  RectSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
+  RectSurface(AbstractGeometry* theParent, vertex position, vertex u, vertex v);
+  virtual ~RectSurface();
 
-class RectSurface: public Surface {
-  public:
-    RectSurface(AbstractGeometry* theParent, Json::Value jsonData);
-    RectSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
-    RectSurface(AbstractGeometry* theParent, vertex position, vertex u, vertex v);
-    virtual ~RectSurface();
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+  virtual string stlRepresentation();
 
-    virtual string stlRepresentation();
+  /**
+   * Returns the surface normal at given distance.
+   * distance should be on the surface.
+   */
+  virtual vertex& normal(const vertex& distance);
+  void setNormal(const vertex& normal);
+  const vertex& u() const;
+  const vertex& v() const;
 
-    /**
-     * Returns the surface normal at given distance.
-     * distance should be on the surface.
-     */
-    virtual vertex& normal(const vertex& distance);
-    void setNormal(const vertex& normal);
-    const vertex& u() const;
-    const vertex& v() const;
+ protected:
 
+  /**
+   * Spanning vector u. Calculated at creation.
+   */
+  vertex _u;
 
-
-  protected:
-
-    /**
-     * Spanning vector u. Calculated at creation.
-     */
-    vertex _u;
-
-    /**
-     * Spanning vector v. Calculated at creation.
-     */
-    vertex _v;
+  /**
+   * Spanning vector v. Calculated at creation.
+   */
+  vertex _v;
 };
 
 #endif /* RECTSURFACE_H_ */

@@ -22,16 +22,14 @@
 #include "Ray.h"
 #include "json.h"
 
-class Mirror: public SurfaceProperty {
-  public:
-    Mirror();
-    Mirror(Json::Value jsonData);
+class Mirror : public SurfaceProperty {
+ public:
+  Mirror();
+  Mirror(Json::Value jsonData);
 
-    virtual ~Mirror();
-    AbstractGeometry* receiveRay(Ray& ray,
-                                 Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
+  virtual ~Mirror();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
 };
 
 #endif /* MIRROR_H_ */

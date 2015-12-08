@@ -26,56 +26,57 @@
 #include "SurfaceProperty.h"
 #include <mutex>
 
-class Solid: public AbstractGeometry {
+class Solid : public AbstractGeometry {
 
-  public:
-    Solid();
-    virtual ~Solid();
+ public:
+  Solid();
+  virtual ~Solid();
 
-    /**
-     * Function that will propagate the ray inside a solid object with sides.
-     */
-    virtual AbstractGeometry* propagateRay(Ray &ray, AbstractGeometry *fromObject);
+  /**
+   * Function that will propagate the ray inside a solid object with sides.
+   */
+  virtual AbstractGeometry* propagateRay(Ray &ray,
+                                         AbstractGeometry *fromObject);
 
-    /**
-     * Objects completely inside this solid must be enclosed.
-     * Will set the objects parent to this.
-     */
-    void encloseObject(AbstractGeometry* obj);
+  /**
+   * Objects completely inside this solid must be enclosed.
+   * Will set the objects parent to this.
+   */
+  void encloseObject(AbstractGeometry* obj);
 
-    /**
-     * This will add SurfaceProperty to all of the surfaces
-     * associated with this object.
-     */
-    void addPropertyToSurfaces(SurfaceProperty* prop);
+  /**
+   * This will add SurfaceProperty to all of the surfaces
+   * associated with this object.
+   */
+  void addPropertyToSurfaces(SurfaceProperty* prop);
 
-    /**
-     * This will add SurfaceProperty to given surface number.
-     */
-    void addPropertyToSurface(SurfaceProperty* prop, unsigned int surfaceNumber);
+  /**
+   * This will add SurfaceProperty to given surface number.
+   */
+  void addPropertyToSurface(SurfaceProperty* prop, unsigned int surfaceNumber);
 
-    // List of surfaces associated with this object
-    std::vector<Surface*> surfaces;
+  // List of surfaces associated with this object
+  std::vector<Surface*> surfaces;
 
-    // List of enclosed objects associated with this object
-    vector<Solid*> enclosedObjects;
+  // List of enclosed objects associated with this object
+  vector<Solid*> enclosedObjects;
 
-    virtual string stlRepresentation();
+  virtual string stlRepresentation();
 
-    /**
-     * Tracer calls this method when the tracing has ended.
-     */
-    virtual void tracerDidEndTracing();
+  /**
+   * Tracer calls this method when the tracing has ended.
+   */
+  virtual void tracerDidEndTracing();
 
-    /**
-     * Lost energy due to leaking rays terminated
-     */
-    static double lostLeakEnergy;
-  protected:
-    Oblivion* _oblivion;
-  private:
-    vector<Surface*> _allEnclosedSurfaces;
-    mutex _savingMutex;
+  /**
+   * Lost energy due to leaking rays terminated
+   */
+  static double lostLeakEnergy;
+ protected:
+  Oblivion* _oblivion;
+ private:
+  vector<Surface*> _allEnclosedSurfaces;
+  mutex _savingMutex;
 
 };
 

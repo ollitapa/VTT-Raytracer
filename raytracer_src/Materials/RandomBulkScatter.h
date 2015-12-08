@@ -21,22 +21,22 @@
 #include "Material.h"
 #include "json.h"
 
-class RandomBulkScatter: public Material {
-  public:
-    RandomBulkScatter();
-    RandomBulkScatter(Json::Value jsonData);
-    RandomBulkScatter(double meanfreepath, double refIndex);
+class RandomBulkScatter : public Material {
+ public:
+  RandomBulkScatter();
+  RandomBulkScatter(Json::Value jsonData);
+  RandomBulkScatter(double meanfreepath, double refIndex);
 
-    virtual ~RandomBulkScatter();
-    virtual void interactWithRay(Ray &ray);
+  virtual ~RandomBulkScatter();
+  virtual void interactWithRay(Ray &ray);
 
-    void propagationDistance(Ray &ray);
+  void propagationDistance(Ray &ray);
 
-  private:
-    void scatter(Ray &ray);
+ private:
+  void scatter(Ray &ray);
 
-    // The mean free path variable
-    double mfp;
+  // The mean free path variable
+  double mfp;
 };
 
 #endif /* RANDOMBULKSCATTER_H_ */

@@ -28,31 +28,30 @@
 
 using namespace std;
 
-
 class AbsorptionSaver {
-    static AbsorptionSaver* instance;
-    AbsorptionSaver();
-    void initAbsorptionFile();
-  public:
-    static AbsorptionSaver* getInstance() {
-        if (instance == NULL) {
-            instance = new AbsorptionSaver();
-        }
-
-        return instance;
+  static AbsorptionSaver* instance;
+  AbsorptionSaver();
+  void initAbsorptionFile();
+ public:
+  static AbsorptionSaver* getInstance() {
+    if (instance == NULL) {
+      instance = new AbsorptionSaver();
     }
 
-    void saveAbsorptionData(vertex& place, double data);
-    void saveVTPAbsorptionfile();
-    static void tracerDidEndTracing();
-    string absorptionFilename;
-  private:
-    uint64_t _absorptionNumber;
-    string _tmpFilenamePoints;
-    string _tmpFilenameData;
-    ofstream _absorptionFile;
-    ofstream _pointsFile;
-    bool _saved;
-    mutex _savingMutex;
+    return instance;
+  }
+
+  void saveAbsorptionData(vertex& place, double data);
+  void saveVTPAbsorptionfile();
+  static void tracerDidEndTracing();
+  string absorptionFilename;
+ private:
+  uint64_t _absorptionNumber;
+  string _tmpFilenamePoints;
+  string _tmpFilenameData;
+  ofstream _absorptionFile;
+  ofstream _pointsFile;
+  bool _saved;
+  mutex _savingMutex;
 };
 #endif /* defined(__MMP_Raytracer__AbsorptionSaver__) */

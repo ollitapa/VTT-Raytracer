@@ -21,14 +21,12 @@
 #include "Surface.h"
 #include "Ray.h"
 
-class Refraction: public SurfaceProperty {
-  public:
-    Refraction();
-    virtual ~Refraction();
-    AbstractGeometry* receiveRay(Ray& ray,
-                                 Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
+class Refraction : public SurfaceProperty {
+ public:
+  Refraction();
+  virtual ~Refraction();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
 };
 
 #endif /* REFRACTION_H_ */

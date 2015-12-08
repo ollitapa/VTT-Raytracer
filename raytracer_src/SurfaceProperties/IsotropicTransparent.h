@@ -22,18 +22,16 @@
 #include "json.h"
 #include "Common.h"
 
-class IsotropicTransparent: public SurfaceProperty {
-  public:
-    IsotropicTransparent();
-    IsotropicTransparent(Json::Value jsonData);
+class IsotropicTransparent : public SurfaceProperty {
+ public:
+  IsotropicTransparent();
+  IsotropicTransparent(Json::Value jsonData);
 
-    /**
-     * Random direction for ray is generated.
-     */
-    AbstractGeometry* receiveRay(Ray &ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-
+  /**
+   * Random direction for ray is generated.
+   */
+  AbstractGeometry* receiveRay(Ray &ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
 
 };
 

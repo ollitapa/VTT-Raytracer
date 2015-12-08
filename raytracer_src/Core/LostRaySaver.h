@@ -25,26 +25,26 @@
 using namespace std;
 
 class LostRaySaver {
-    LostRaySaver();
-    virtual ~LostRaySaver();
-    static LostRaySaver* instance;
-  public:
+  LostRaySaver();
+  virtual ~LostRaySaver();
+  static LostRaySaver* instance;
+ public:
 
-    static LostRaySaver* getInstance() {
-        if (instance == NULL) {
-            instance = new LostRaySaver();
-        }
-
-        return instance;
+  static LostRaySaver* getInstance() {
+    if (instance == NULL) {
+      instance = new LostRaySaver();
     }
 
-    void saveRay(Ray& ray);
-    void endTracing();
+    return instance;
+  }
 
-  private:
-    ofstream _file;
-    unsigned int _count;
-    mutex _savingMutex;
+  void saveRay(Ray& ray);
+  void endTracing();
+
+ private:
+  ofstream _file;
+  unsigned int _count;
+  mutex _savingMutex;
 };
 
 #endif /* RAYTRACER_SRC_CORE_LOSTRAYSAVER_H_ */

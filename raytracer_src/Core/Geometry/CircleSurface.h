@@ -25,20 +25,19 @@
 #include "Surface.h"
 #include "json.h"
 
-class CircleSurface: public Surface {
-  public:
-    CircleSurface(AbstractGeometry* theParent, vertex center, double radius,
-                  vertex theNormal);
-    virtual ~CircleSurface();
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+class CircleSurface : public Surface {
+ public:
+  CircleSurface(AbstractGeometry* theParent, vertex center, double radius,
+                vertex theNormal);
+  virtual ~CircleSurface();
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-
-    vertex center;
-    double radius;
+  vertex center;
+  double radius;
 };
 
 #endif /* CircleSurface_H_ */

@@ -36,68 +36,68 @@
 using namespace std;
 
 struct RayPathData {
-    vector<double> pathpoints;
-    vector<double> colors;
-    vector<long long> offsets;
-    long long pointNumber;
-    double lastWavelength;
-    long long rayNumber;
+  vector<double> pathpoints;
+  vector<double> colors;
+  vector<long long> offsets;
+  long long pointNumber;
+  double lastWavelength;
+  long long rayNumber;
 };
 
 class TracerController {
-  public:
-    TracerController();
-    TracerController(Json::Value jsonData);
-    virtual ~TracerController();
+ public:
+  TracerController();
+  TracerController(Json::Value jsonData);
+  virtual ~TracerController();
 
-    /*
-     * This adds a source to be traced.
-     */
-    void addSource(Source* newSource);
+  /*
+   * This adds a source to be traced.
+   */
+  void addSource(Source* newSource);
 
-    /**
-     * Will start tracing from sources one by one.
-     */
-    void startTracing();
+  /**
+   * Will start tracing from sources one by one.
+   */
+  void startTracing();
 
-    /*
-     * Maximum number of raytracing iterations before moving
-     * on to next ray.
-     */
-    double maxIterations;
-  private:
+  /*
+   * Maximum number of raytracing iterations before moving
+   * on to next ray.
+   */
+  double maxIterations;
+ private:
 
-    void _traceRay(Source* s);
+  void _traceRay(Source* s);
 
-    vector<Source*> _sources;
-    void _saveRayPathPoint(Ray& ray, RayPathData& data);
-    void _saveNewRayPath(Ray& ray, RayPathData& data);
-    void _saveRayEnd(RayPathData& data);
-    void _saveRayPathData(RayPathData& data);
-    void _saveVTPRayfile();
-    string _rayPathsFilename;
-    string _rayTmpFilename;
-    string _rayOffsetsFilename;
-    string _rayColorFilename;
-    ofstream _rayTmpFile;
-    ofstream _rayOffsetsFile;
-    ofstream _rayColorFile;
-    long long _totalPointNumber;
-    long long _totalRayNumber;
+  vector<Source*> _sources;
+  void _saveRayPathPoint(Ray& ray, RayPathData& data);
+  void _saveNewRayPath(Ray& ray, RayPathData& data);
+  void _saveRayEnd(RayPathData& data);
+  void _saveRayPathData(RayPathData& data);
+  void _saveVTPRayfile();
+  string _rayPathsFilename;
+  string _rayTmpFilename;
+  string _rayOffsetsFilename;
+  string _rayColorFilename;
+  ofstream _rayTmpFile;
+  ofstream _rayOffsetsFile;
+  ofstream _rayColorFile;
+  long long _totalPointNumber;
+  long long _totalRayNumber;
 
-    atomic<unsigned long long> _maxIterRays;
-    unsigned long long _raysLeftToTrace;
+  atomic<unsigned long long> _maxIterRays;
+  unsigned long long _raysLeftToTrace;
 
-    unsigned int maxThreads;
+  unsigned int maxThreads;
 
-    mutex _rayWriteMutex;
-    mutex _powerSavingMutex;
-    mutex _rayStartMutex;
-    //LostRaySaver* _lostrays;
-    // Power lost by terminating rays due to too many iterations
-    double _lostPower;
-    // Fluorescent power lost by terminating rays due to too many iterations
-    double _lostPowerFluor;
+  mutex _rayWriteMutex;
+  mutex _powerSavingMutex;
+  mutex _rayStartMutex;
+  //LostRaySaver* _lostrays;
+  // Power lost by terminating rays due to too many iterations
+  double _lostPower;
+  // Fluorescent power lost by terminating rays due to too many iterations
+  double _lostPowerFluor;
 
 };
 

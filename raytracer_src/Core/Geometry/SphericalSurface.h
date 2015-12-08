@@ -24,21 +24,21 @@
 #include <cmath>
 #include "Surface.h"
 
-class SphericalSurface: public Surface {
-  public:
-    SphericalSurface(AbstractGeometry* theParent, vertex center, double radius);
-    virtual ~SphericalSurface();
-    /**
-     * Will calculate the intersection distance to with ray and this surface
-     */
-    virtual bool rayIntersects(Ray &ray, double& atDistance,
-                               AbstractGeometry* fromObject);
+class SphericalSurface : public Surface {
+ public:
+  SphericalSurface(AbstractGeometry* theParent, vertex center, double radius);
+  virtual ~SphericalSurface();
+  /**
+   * Will calculate the intersection distance to with ray and this surface
+   */
+  virtual bool rayIntersects(Ray &ray, double& atDistance,
+                             AbstractGeometry* fromObject);
 
-    virtual string stlRepresentation();
-    vertex& normal(const vertex& distance);
+  virtual string stlRepresentation();
+  vertex& normal(const vertex& distance);
 
-    vertex center;
-    double radius;
+  vertex center;
+  double radius;
 };
 
 #endif /* SPHERICALSURFACE_H_ */

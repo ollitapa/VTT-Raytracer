@@ -26,11 +26,11 @@ OpaqueMaterial::~OpaqueMaterial() {
 }
 
 void OpaqueMaterial::propagationDistance(Ray& ray) {
-    ray.length = 0;
-    ray.flux = 0;
+  ray.length = 0;
+  ray.flux = 0;
 }
 
 void OpaqueMaterial::interactWithRay(Ray& ray) {
-    ray.length = 0;
-    ray.flux = 0;
+  ray.length = 0;
+  ray.flux = 0;
 }

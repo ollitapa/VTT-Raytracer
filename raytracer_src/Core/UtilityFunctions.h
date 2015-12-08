@@ -42,7 +42,6 @@ class SolidCone;
 #include "SolidCuboid.h"
 #include "SolidPoly.h"
 
-
 /**
  * Find common surfaces of two Solids.
  * TODO: Currently supports only SolidCuboid and Cone
@@ -106,7 +105,5 @@ AbstractGeometry* importSingleStlASCII(string& filename);
  * @return map of imported objects. Accessible by names.
  */
 AbstractGeometry* importSingleStlBinary(string& filename);
-
-
 
 #endif /* UTILITYFUNCTIONS_H_ */

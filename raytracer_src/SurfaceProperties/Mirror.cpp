@@ -17,30 +17,29 @@
 #include "Mirror.h"
 
 Mirror::Mirror() {
-    _hierarchy = HIERARCHY_MIRROR;
-    _cooperation_level = COOPERATION_LEVEL_MIRROR;
+  _hierarchy = HIERARCHY_MIRROR;
+  _cooperation_level = COOPERATION_LEVEL_MIRROR;
 }
 
 Mirror::~Mirror() {
-    _hierarchy = HIERARCHY_MIRROR;
-    _cooperation_level = COOPERATION_LEVEL_MIRROR;
+  _hierarchy = HIERARCHY_MIRROR;
+  _cooperation_level = COOPERATION_LEVEL_MIRROR;
 }
 
-AbstractGeometry* Mirror::receiveRay(Ray& ray,
-                                     Surface* surface,
+AbstractGeometry* Mirror::receiveRay(Ray& ray, Surface* surface,
                                      AbstractGeometry* from,
                                      AbstractGeometry* to) {
-    //Incident ray can be decomposed to normal and transverse components
-    //ki = ki_nor + ki_tra;
-    vertex n = surface->normal(ray.location);
-    vertex ki     = ray.direction;
-    vertex ki_nor = arma::dot(ki, n)  * n;
-    vertex ki_tra = ki - ki_nor;
-    vertex kr     = ki_tra - ki_nor;
-    // Set ray properties
-    ray.direction = kr;
-    // Send ray back to where it came from
-    return (from);
+  //Incident ray can be decomposed to normal and transverse components
+  //ki = ki_nor + ki_tra;
+  vertex n = surface->normal(ray.location);
+  vertex ki = ray.direction;
+  vertex ki_nor = arma::dot(ki, n) * n;
+  vertex ki_tra = ki - ki_nor;
+  vertex kr = ki_tra - ki_nor;
+  // Set ray properties
+  ray.direction = kr;
+  // Send ray back to where it came from
+  return (from);
 }
 
 Mirror::Mirror(Json::Value jsonData) {

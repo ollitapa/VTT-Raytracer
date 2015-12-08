@@ -22,21 +22,21 @@
 #include "Ray.h"
 #include "json.h"
 
-class IsotropicVolumeSource: public Source {
-  public:
-    IsotropicVolumeSource(Solid* theEnclosingObject, uint64_t n_rays);
-    IsotropicVolumeSource(Json::Value jsonData, Solid* theEnclosingObject);
+class IsotropicVolumeSource : public Source {
+ public:
+  IsotropicVolumeSource(Solid* theEnclosingObject, uint64_t n_rays);
+  IsotropicVolumeSource(Json::Value jsonData, Solid* theEnclosingObject);
 
-    virtual ~IsotropicVolumeSource();
+  virtual ~IsotropicVolumeSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed random direction and
-     * distributed evenly.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed random direction and
+   * distributed evenly.
+   *
+   */
+  virtual Ray generateRay();
 
 };
 

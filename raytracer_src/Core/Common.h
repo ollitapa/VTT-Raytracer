@@ -73,11 +73,11 @@ double rnd1();
  * rndrange(): Generate a random number between min and max
  *
  */
-template <typename Type>
+template<typename Type>
 Type rndrangeDouble(Type min, Type max) {
-    static thread_local std::mt19937 generator(rndSeed());
-    std::uniform_real_distribution<Type> distribution(min, max);
-    return distribution(generator);
+  static thread_local std::mt19937 generator(rndSeed());
+  std::uniform_real_distribution < Type > distribution(min, max);
+  return distribution(generator);
 }
 
 /*
@@ -85,35 +85,35 @@ Type rndrangeDouble(Type min, Type max) {
  * rndrange(): Generate a random number between min and max
  *
  */
-template <typename Type2>
+template<typename Type2>
 Type2 rndrangeInt(Type2 min, Type2 max) {
-    static thread_local std::mt19937 generator(rndSeed());
-    std::uniform_int_distribution<Type2> distribution(min, max);
-    return distribution(generator);
+  static thread_local std::mt19937 generator(rndSeed());
+  std::uniform_int_distribution < Type2 > distribution(min, max);
+  return distribution(generator);
 }
 
 /**
  * Sign of the number. Negative: -1, Positive: 1, Zero: 0
  */
-template <typename T> inline constexpr
+template<typename T> inline constexpr
 int signum(T x, std::false_type is_signed) {
-    return T(0) < x;
+  return T(0) < x;
 }
 
 /**
  * Sign of the number. Negative: -1, Positive: 1, Zero: 0
  */
-template <typename T> inline constexpr
+template<typename T> inline constexpr
 int signum(T x, std::true_type is_signed) {
-    return (T(0) < x) - (x < T(0));
+  return (T(0) < x) - (x < T(0));
 }
 
 /**
  * Sign of the number. Negative: -1, Positive: 1, Zero: 0
  */
-template <typename T> inline constexpr
+template<typename T> inline constexpr
 int signum(T x) {
-    return signum(x, std::is_signed<T>());
+  return signum(x, std::is_signed<T>());
 }
 
 /*
@@ -132,7 +132,6 @@ arma::vec ipol(arma::vec& xx, arma::vec& yy, arma::vec& xi);
 
 arma::vec find1(arma::vec &xx, double a);
 
-
 /*
  *
  * interp1p(): Interpolate a value yi corresponding to xi
@@ -141,7 +140,6 @@ arma::vec find1(arma::vec &xx, double a);
  */
 
 double interp1p(arma::vec& x, arma::vec& y, double xi);
-
 
 /*
  *

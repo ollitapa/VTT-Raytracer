@@ -23,13 +23,13 @@ Oblivion::~Oblivion() {
 }
 
 AbstractGeometry* Oblivion::propagateRay(Ray& ray,
-        AbstractGeometry* fromObject) {
-    ray.flux = 0;
-    return(this);
+                                         AbstractGeometry* fromObject) {
+  ray.flux = 0;
+  return (this);
 }
 
 AbstractGeometry* Oblivion::receiveRay(Ray& ray, AbstractGeometry* from,
-        AbstractGeometry* to) {
-    ray.flux = 0;
-    return(to);
+                                       AbstractGeometry* to) {
+  ray.flux = 0;
+  return (to);
 }

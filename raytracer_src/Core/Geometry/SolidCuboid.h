@@ -23,39 +23,38 @@
 #include <vector>
 #include "json.h"
 
-
 using namespace std;
 
 /**
  * Solid cuboid with straight sides and 8 vertices.
  */
-class SolidCuboid: public Solid {
-  public:
-    SolidCuboid(double width, double height, double depth, vertex position);
-    SolidCuboid(vertex position, vector<vertex> spanningVectors);
-    /**
-     * JSON data for constructing a Cuboid.
-     *
-     * Should include:
-     * "location"
-     * "wx"
-     * "wy"
-     * "wz"
-     */
-    SolidCuboid(Json::Value jsonData);
-    virtual ~SolidCuboid();
+class SolidCuboid : public Solid {
+ public:
+  SolidCuboid(double width, double height, double depth, vertex position);
+  SolidCuboid(vertex position, vector<vertex> spanningVectors);
+  /**
+   * JSON data for constructing a Cuboid.
+   *
+   * Should include:
+   * "location"
+   * "wx"
+   * "wy"
+   * "wz"
+   */
+  SolidCuboid(Json::Value jsonData);
+  virtual ~SolidCuboid();
 
-    /**
-     * Returns a random point inside the object.
-     */
-    virtual vertex randomPointInside();
+  /**
+   * Returns a random point inside the object.
+   */
+  virtual vertex randomPointInside();
 
-  private:
+ private:
 
-    vertex _x;
-    vertex _y;
-    vertex _z;
-    vertex _p;
+  vertex _x;
+  vertex _y;
+  vertex _z;
+  vertex _p;
 
 };
 

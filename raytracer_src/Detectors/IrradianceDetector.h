@@ -28,64 +28,63 @@
 using namespace std;
 using namespace tbb;
 
-class IrradianceDetector: public SurfaceProperty {
+class IrradianceDetector : public SurfaceProperty {
 
-  public:
+ public:
 
 //		IrradianceDetector();
-	IrradianceDetector(Surface* detectorObject, int XPixels, int YPixels,
-	                   int N_RAYS);
-	virtual ~IrradianceDetector();
-	AbstractGeometry* receiveRay(Ray& ray, Surface* surface, AbstractGeometry* from,
-	                             AbstractGeometry* to);
+  IrradianceDetector(Surface* detectorObject, int XPixels, int YPixels,
+                     int N_RAYS);
+  virtual ~IrradianceDetector();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
 
-	void RecordRayData(Ray& ray);
-  public:
+  void RecordRayData(Ray& ray);
+ public:
 
-	void SaveRays(string& RayFileName);
+  void SaveRays(string& RayFileName);
 
-	void Irradiance(string& DetectorDataFileName, int NUM_THREADS);
+  void Irradiance(string& DetectorDataFileName, int NUM_THREADS);
 
-	void ConstructIrradianceData(int NUM_THREADS);
+  void ConstructIrradianceData(int NUM_THREADS);
 
-	void IrradianceCrossSectionVertical(int ColNumber,
-	                                    string& CrossSectionDataFileName);
-	void IrradianceCrossSectionHorizontal(int RowNumber,
-	                                      string& CrossSectionDataFileName);
+  void IrradianceCrossSectionVertical(int ColNumber,
+                                      string& CrossSectionDataFileName);
+  void IrradianceCrossSectionHorizontal(int RowNumber,
+                                        string& CrossSectionDataFileName);
 
-	void Spectrum(string& SpectrumDataFileName);
+  void Spectrum(string& SpectrumDataFileName);
 
-  public:
-	// X and Y pixel number
-	int XPix;
-	int YPix;
+ public:
+  // X and Y pixel number
+  int XPix;
+  int YPix;
 
-	// step-variables
-	double XSTEP;
-	double YSTEP;
+  // step-variables
+  double XSTEP;
+  double YSTEP;
 
-	double RS_width;
-	double RS_height;
+  double RS_width;
+  double RS_height;
 
-	// Container for the detected rays
-	concurrent_vector<Ray> DetectedRays;
+  // Container for the detected rays
+  concurrent_vector<Ray> DetectedRays;
 
-	// Total detected flux
-	double TotalFlux;
+  // Total detected flux
+  double TotalFlux;
 
-	mat FluxData;
+  mat FluxData;
 
-	// Number of Rays propagated
-	int TotalNumberOfRays;
+  // Number of Rays propagated
+  int TotalNumberOfRays;
 
-	vec pos;
-	vec uvec;
-	vec vvec;
+  vec pos;
+  vec uvec;
+  vec vvec;
 
+ private:
 
-  private:
-
-	static int count;
+  static int count;
 
 };
 

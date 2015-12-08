@@ -57,7 +57,8 @@ inline void checkRequiredJSONParam(Json::Value& jsonData, string param,
     string demangled = ss.str();
 #else
     int status;
-    char * demangled = abi::__cxa_demangle(typeid(sender).name(), 0, 0, &status);
+    char * demangled = abi::__cxa_demangle(typeid(sender).name(), 0, 0,
+                                           &status);
 #endif
     cerr << endl << endl;
     cerr << demangled << ": missing " << param << endl;
@@ -77,7 +78,8 @@ inline void fileExists(string name, TT* sender) {
     string demangled = ss.str();
 #else
     int status;
-    char * demangled = abi::__cxa_demangle(typeid(sender).name(), 0, 0, &status);
+    char * demangled = abi::__cxa_demangle(typeid(sender).name(), 0, 0,
+                                           &status);
 #endif
     cerr << endl << endl;
     cerr << demangled << ": File not found! " << name << endl;

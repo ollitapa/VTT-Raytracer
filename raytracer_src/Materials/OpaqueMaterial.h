@@ -21,13 +21,13 @@
 #include "json.h"
 #include "Ray.h"
 
-class OpaqueMaterial: public Material {
-  public:
-    OpaqueMaterial();
-    OpaqueMaterial(Json::Value jsonData);
-    virtual ~OpaqueMaterial();
-    void propagationDistance(Ray &ray);
-    virtual void interactWithRay(Ray &ray);
+class OpaqueMaterial : public Material {
+ public:
+  OpaqueMaterial();
+  OpaqueMaterial(Json::Value jsonData);
+  virtual ~OpaqueMaterial();
+  void propagationDistance(Ray &ray);
+  virtual void interactWithRay(Ray &ray);
 };
 
 #endif /* RAYTRACER_SRC_MATERIALS_OPAQUEMATERIAL_H_ */

@@ -18,93 +18,93 @@
 
 BeerLambertLaw::BeerLambertLaw(Material* host)
     : ContinuousInteraction(host) {
-    _discretization = 0.1;
-    _absSaver = AbsorptionSaver::getInstance();
+  _discretization = 0.1;
+  _absSaver = AbsorptionSaver::getInstance();
 }
 
 BeerLambertLaw::BeerLambertLaw(Json::Value jsonData, Material* host)
     : ContinuousInteraction(host) {
-    checkRequiredJSONParam(jsonData, "discretization", this);
-    checkRequiredJSONParam(jsonData, "wavelengths", this);
-    checkRequiredJSONParam(jsonData, "attenuation", this);
-    _absSaver = AbsorptionSaver::getInstance();
-    _discretization = jsonData["discretization"].asDouble();
-    // Attenuation spectrum ###################
-    const Json::Value wave = jsonData["wavelengths"];
-    const Json::Value att = jsonData["attenuation"];
-    vector<double> waves;
-    vector<double> intens;
+  checkRequiredJSONParam(jsonData, "discretization", this);
+  checkRequiredJSONParam(jsonData, "wavelengths", this);
+  checkRequiredJSONParam(jsonData, "attenuation", this);
+  _absSaver = AbsorptionSaver::getInstance();
+  _discretization = jsonData["discretization"].asDouble();
+  // Attenuation spectrum ###################
+  const Json::Value wave = jsonData["wavelengths"];
+  const Json::Value att = jsonData["attenuation"];
+  vector<double> waves;
+  vector<double> intens;
 
-    for (unsigned int i = 0; i < wave.size(); ++i)
-        waves.push_back(wave[i].asDouble());
+  for (unsigned int i = 0; i < wave.size(); ++i)
+    waves.push_back(wave[i].asDouble());
 
-    for (unsigned int i = 0; i < att.size(); ++i)
-        intens.push_back(att[i].asDouble());
+  for (unsigned int i = 0; i < att.size(); ++i)
+    intens.push_back(att[i].asDouble());
 
-    _wavelengths = waves;
-    _attenuationCoeffs = intens;
-    // ###################
+  _wavelengths = waves;
+  _attenuationCoeffs = intens;
+  // ###################
 }
-
 
 BeerLambertLaw::~BeerLambertLaw() {
 }
 
 void BeerLambertLaw::performContinuousInteraction(Ray& ray) {
 #ifdef DEBUG_VERBOSE
-    cout << "Performing continuous interaction on material..." << endl;
+  cout << "Performing continuous interaction on material..." << endl;
 #endif
-    // Previous ray location
-    vertex preLoc = ray.location - ray.length * ray.direction;
-    double step = ray.length * _discretization;
+  // Previous ray location
+  vertex preLoc = ray.location - ray.length * ray.direction;
+  double step = ray.length * _discretization;
 
-    for (double distance = 0; distance <= ray.length; distance = step + distance) {
-        // Find matching wavelength discretization
-        vector<double>::iterator low;
-        low = lower_bound(_wavelengths.begin(), _wavelengths.end(), ray.wavelength);
+  for (double distance = 0; distance <= ray.length;
+      distance = step + distance) {
+    // Find matching wavelength discretization
+    vector<double>::iterator low;
+    low = lower_bound(_wavelengths.begin(), _wavelengths.end(), ray.wavelength);
 
-        if (low == _wavelengths.end())
-            low -= 1;
+    if (low == _wavelengths.end())
+      low -= 1;
 
-        // Attenuation coeff
-        double sigma = _attenuationCoeffs[low - _wavelengths.begin()];
-        // Save old energy
-        double p_before = ray.radiantPower();
-        // Calculate attenuation
-        ray.flux *= exp(-sigma * step);
-        double lostE = p_before - ray.radiantPower();
-        // Save absorption
-        vertex newLoc = preLoc + ray.direction * (distance + step);
-        _absSaver->saveAbsorptionData(newLoc, lostE);
-    }
+    // Attenuation coeff
+    double sigma = _attenuationCoeffs[low - _wavelengths.begin()];
+    // Save old energy
+    double p_before = ray.radiantPower();
+    // Calculate attenuation
+    ray.flux *= exp(-sigma * step);
+    double lostE = p_before - ray.radiantPower();
+    // Save absorption
+    vertex newLoc = preLoc + ray.direction * (distance + step);
+    _absSaver->saveAbsorptionData(newLoc, lostE);
+  }
 
 #ifdef DEBUG_VERBOSE
-    cout << "... continuous interaction done." << endl;
+  cout << "... continuous interaction done." << endl;
 #endif
 }
 
 double BeerLambertLaw::discretization() const {
-    return _discretization;
+  return _discretization;
 }
 
 void BeerLambertLaw::setDiscretization(double discretization) {
-    _discretization = discretization;
+  _discretization = discretization;
 }
 
 const vector<double>& BeerLambertLaw::attenuationCoeffs() const {
-    return _attenuationCoeffs;
+  return _attenuationCoeffs;
 }
 
 void BeerLambertLaw::setAttenuationCoeffs(
     const vector<double>& attenuationCoeffs) {
-    _attenuationCoeffs = attenuationCoeffs;
+  _attenuationCoeffs = attenuationCoeffs;
 }
 
 const vector<double>& BeerLambertLaw::wavelengths() const {
-    return _wavelengths;
+  return _wavelengths;
 }
 
 void BeerLambertLaw::setWavelengths(const vector<double>& wavelengths) {
-    _wavelengths = wavelengths;
+  _wavelengths = wavelengths;
 }
 

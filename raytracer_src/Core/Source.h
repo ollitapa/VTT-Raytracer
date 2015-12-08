@@ -23,64 +23,62 @@
 #include <mutex>
 
 class Source {
-  public:
-	Source(AbstractGeometry *theEnclosingObject, uint64_t n_rays);
-	virtual ~Source();
+ public:
+  Source(AbstractGeometry *theEnclosingObject, uint64_t n_rays);
+  virtual ~Source();
 
-	/**
-	 * Return the first solid object which starts
-	 * to propagate the ray.
-	 */
-	virtual AbstractGeometry* startingObject() = 0;
+  /**
+   * Return the first solid object which starts
+   * to propagate the ray.
+   */
+  virtual AbstractGeometry* startingObject() = 0;
 
+  /**
+   * This method will generate rays from this source.
+   *
+   */
+  virtual Ray generateRay() = 0;
 
-	/**
-	 * This method will generate rays from this source.
-	 *
-	 */
-	virtual Ray generateRay() = 0;
+  /**
+   * Set the spectrum of this source
+   */
+  void setSpectrum(const vector<double>& wavelengths,
+                   const vector<double>& intensities);
 
-	/**
-	 * Set the spectrum of this source
-	 */
-	void setSpectrum(const vector<double>& wavelengths,
-	                 const vector<double>& intensities);
+  /**
+   * Object that this source is attached to.
+   */
+  AbstractGeometry *enclosingObject;
 
-	/**
-	 * Object that this source is attached to.
-	 */
-	AbstractGeometry *enclosingObject;
+  /**
+   * Number of rays to generate.
+   */
+  uint64_t nRays;
 
-	/**
-	* Number of rays to generate.
-	*/
-	uint64_t nRays;
+  /**
+   * Discrete wavelengths used. [nm]
+   */
+  vector<double> wavelengths;
 
-	/**
-	 * Discrete wavelengths used. [nm]
-	 */
-	vector<double> wavelengths;
+  /**
+   * Intensities. [W/nm].
+   */
+  vector<double> intensities;
 
-	/**
-	 * Intensities. [W/nm].
-	 */
-	vector<double> intensities;
+ protected:
+  /**
+   * This function will initialize the ray energy and wavelength.
+   * according to its wavelength and spectrum.
+   * An evenly distributed rays are assumed.
+   */
+  void _initialiseRay(Ray& r);
 
+ private:
 
-  protected:
-	/**
-	 * This function will initialize the ray energy and wavelength.
-	 * according to its wavelength and spectrum.
-	 * An evenly distributed rays are assumed.
-	 */
-	void _initialiseRay(Ray& r);
-
-  private:
-
-	uint64_t _rayIdx;
-	double _raysPerWave;
-	size_t _waveSize;
-	mutex _initMutex;
+  uint64_t _rayIdx;
+  double _raysPerWave;
+  size_t _waveSize;
+  mutex _initMutex;
 };
 
 #endif /* SOURCE_H_ */

@@ -31,32 +31,32 @@
  * to the direction of its normal. Currently works for rectangular
  * surfaces only.
  */
-class IsotropicSurfaceSource: public Source {
-  public:
-    IsotropicSurfaceSource(RectSurface* theEnclosingObject, uint64_t n_rays);
-    IsotropicSurfaceSource(Json::Value jsonData, Solid* theEnclosingObject);
-    virtual ~IsotropicSurfaceSource();
+class IsotropicSurfaceSource : public Source {
+ public:
+  IsotropicSurfaceSource(RectSurface* theEnclosingObject, uint64_t n_rays);
+  IsotropicSurfaceSource(Json::Value jsonData, Solid* theEnclosingObject);
+  virtual ~IsotropicSurfaceSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed to normal direction of the surface and
-     * distributed evenly.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed to normal direction of the surface and
+   * distributed evenly.
+   *
+   */
+  virtual Ray generateRay();
 
-    /**
-     * Direction of the rays. It is initialized to surface normal
-     */
-    vertex direction;
+  /**
+   * Direction of the rays. It is initialized to surface normal
+   */
+  vertex direction;
 
-  private:
+ private:
 
-    RectSurface* _surface;
-    vertex _a;
-    vertex _b;
-    bool _toObjectGiven;
+  RectSurface* _surface;
+  vertex _a;
+  vertex _b;
+  bool _toObjectGiven;
 };
 
 #endif /* RAYTRACER_SRC_SOURCES_ISOTROPICSURFACESOURCE_H_ */

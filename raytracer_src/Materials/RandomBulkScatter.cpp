@@ -17,43 +17,43 @@
 #include "RandomBulkScatter.h"
 
 RandomBulkScatter::RandomBulkScatter() {
-    // Default values for the isotropically
-    // bulk-scattering objec
-    mfp = 1.0;
-    refractiveIndex = 1.0;
+  // Default values for the isotropically
+  // bulk-scattering objec
+  mfp = 1.0;
+  refractiveIndex = 1.0;
 }
 
 RandomBulkScatter::RandomBulkScatter(double meanfreepath, double refIndex) {
-    mfp = meanfreepath;
-    refractiveIndex = refIndex;
+  mfp = meanfreepath;
+  refractiveIndex = refIndex;
 }
 
 RandomBulkScatter::RandomBulkScatter(Json::Value jsonData) {
-    checkRequiredJSONParam(jsonData, "meanFreePath", this);
-    checkRequiredJSONParam(jsonData, "refractiveIndex", this);
-    mfp = jsonData["meanFreePath"].asDouble();
-    refractiveIndex = jsonData["refractiveIndex"].asDouble();
+  checkRequiredJSONParam(jsonData, "meanFreePath", this);
+  checkRequiredJSONParam(jsonData, "refractiveIndex", this);
+  mfp = jsonData["meanFreePath"].asDouble();
+  refractiveIndex = jsonData["refractiveIndex"].asDouble();
 }
 
 RandomBulkScatter::~RandomBulkScatter() {
 }
 
 void RandomBulkScatter::interactWithRay(Ray& ray) {
-    scatter(ray);
+  scatter(ray);
 }
 
 void RandomBulkScatter::scatter(Ray &ray) {
-    // ---------- DO ISOTROPIC SCATTERING -----------------
-    double tht = acos(1.0 - 2.0 * rnd1());
-    double phi = rnd1() * 2.0 * M_PI;
-    // ----------------------------------------------------
-    ray.direction[0] = sin(tht) * cos(phi);
-    ray.direction[1] = sin(tht) * sin(phi);
-    ray.direction[2] = cos(tht);
+  // ---------- DO ISOTROPIC SCATTERING -----------------
+  double tht = acos(1.0 - 2.0 * rnd1());
+  double phi = rnd1() * 2.0 * M_PI;
+  // ----------------------------------------------------
+  ray.direction[0] = sin(tht) * cos(phi);
+  ray.direction[1] = sin(tht) * sin(phi);
+  ray.direction[2] = cos(tht);
 }
 
 void RandomBulkScatter::propagationDistance(Ray &ray) {
-    // Determine the ray length by using previously
-    // initialized (see Constructor!) Mean Free Path
-    ray.length = -mfp * log(1.0 - rnd1());
+  // Determine the ray length by using previously
+  // initialized (see Constructor!) Mean Free Path
+  ray.length = -mfp * log(1.0 - rnd1());
 }

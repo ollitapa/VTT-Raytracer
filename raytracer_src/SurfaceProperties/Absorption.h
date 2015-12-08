@@ -26,40 +26,38 @@
 
 #define ABSORPTION_BUFFER_SIZE 1000000
 
-class Absorption: public SurfaceProperty {
-  public:
-    Absorption();
-    Absorption(Json::Value jsonData);
-    virtual ~Absorption();
-    AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-    double absorptionCoefficient;
+class Absorption : public SurfaceProperty {
+ public:
+  Absorption();
+  Absorption(Json::Value jsonData);
+  virtual ~Absorption();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
+  double absorptionCoefficient;
 
+  static void _initAbsorptionFile();
+  static void _saveAbsorptionData(vertex& place, double data);
 
-    static void _initAbsorptionFile();
-    static void _saveAbsorptionData(vertex& place, double data);
+  static string _tmpFilenamePoints;
+  static string _tmpFilenameData;
+  static string _absorptionFilename;
+  static ofstream _absorptionFile;
+  static ofstream _pointsFile;
+  static bool _saveAbsorption;
+  static bool _configured;
+  static void _saveTempAbsorptionFile(int size);
+  static void _saveVTPAbsorptionfile();
+  static unsigned long long _absorptionNumber;
 
-    static string _tmpFilenamePoints;
-    static string _tmpFilenameData;
-    static string _absorptionFilename;
-    static ofstream _absorptionFile;
-    static ofstream _pointsFile;
-    static bool _saveAbsorption;
-    static bool _configured;
-    static void _saveTempAbsorptionFile(int size);
-    static void _saveVTPAbsorptionfile();
-    static unsigned long long _absorptionNumber;
+  /**
+   * Tracer calls this method when the tracing has ended.
+   */
+  virtual void tracerDidEndTracing();
 
-    /**
-     * Tracer calls this method when the tracing has ended.
-     */
-    virtual void tracerDidEndTracing();
-
-  private:
-    static mutex _savingMutex;
-    static vector<double> _points;
-    static vector<double> _absorption;
+ private:
+  static mutex _savingMutex;
+  static vector<double> _points;
+  static vector<double> _absorption;
 };
 
 #endif /* ABSORPTION_H_ */

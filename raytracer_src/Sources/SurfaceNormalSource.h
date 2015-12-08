@@ -29,32 +29,32 @@
  * This is a source for surface. Rays are generated and collimated to
  * surface normal direction and distributed evenly across the surface.
  */
-class SurfaceNormalSource: public Source {
-  public:
-    SurfaceNormalSource(RectSurface* enclosingObject, uint64_t n_rays);
-    SurfaceNormalSource(Json::Value jsonData, Solid* theEnclosingObject);
+class SurfaceNormalSource : public Source {
+ public:
+  SurfaceNormalSource(RectSurface* enclosingObject, uint64_t n_rays);
+  SurfaceNormalSource(Json::Value jsonData, Solid* theEnclosingObject);
 
-    virtual ~SurfaceNormalSource();
+  virtual ~SurfaceNormalSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed to normal direction of the surface and
-     * distributed evenly.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed to normal direction of the surface and
+   * distributed evenly.
+   *
+   */
+  virtual Ray generateRay();
 
-    /**
-     * Direction of the rays. It is initialized to surface normal
-     */
-    vertex direction;
-  private:
+  /**
+   * Direction of the rays. It is initialized to surface normal
+   */
+  vertex direction;
+ private:
 
-    RectSurface* _surface;
-    vertex _a;
-    vertex _b;
-    bool _toObjectGiven;
+  RectSurface* _surface;
+  vertex _a;
+  vertex _b;
+  bool _toObjectGiven;
 };
 
 #endif /* SURFACENORMALSOURCE_H_ */

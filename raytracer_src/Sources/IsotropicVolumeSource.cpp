@@ -17,56 +17,56 @@
 #include "IsotropicVolumeSource.h"
 
 IsotropicVolumeSource::IsotropicVolumeSource(Solid* theEnclosingObject,
-        uint64_t n_rays)
+                                             uint64_t n_rays)
     : Source(theEnclosingObject, n_rays) {
 }
 
 IsotropicVolumeSource::IsotropicVolumeSource(Json::Value jsonData,
-        Solid* theEnclosingObject)
+                                             Solid* theEnclosingObject)
     : Source(theEnclosingObject, 1) {
-    checkRequiredJSONParam(jsonData, "wavelengths", this);
-    checkRequiredJSONParam(jsonData, "intensities", this);
-    checkRequiredJSONParam(jsonData, "rays", this);
-    // Number of rays
-    nRays = jsonData["rays"].asUInt64();
-    // Spectrum ###################
-    const Json::Value wave = jsonData["wavelengths"];
-    const Json::Value inte = jsonData["intensities"];
-    vector<double> waves;
-    vector<double> intens;
+  checkRequiredJSONParam(jsonData, "wavelengths", this);
+  checkRequiredJSONParam(jsonData, "intensities", this);
+  checkRequiredJSONParam(jsonData, "rays", this);
+  // Number of rays
+  nRays = jsonData["rays"].asUInt64();
+  // Spectrum ###################
+  const Json::Value wave = jsonData["wavelengths"];
+  const Json::Value inte = jsonData["intensities"];
+  vector<double> waves;
+  vector<double> intens;
 
-    for (unsigned int i = 0; i < wave.size(); ++i)
-        waves.push_back(wave[i].asDouble());
+  for (unsigned int i = 0; i < wave.size(); ++i)
+    waves.push_back(wave[i].asDouble());
 
-    for (unsigned int i = 0; i < inte.size(); ++i)
-        intens.push_back(inte[i].asDouble());
+  for (unsigned int i = 0; i < inte.size(); ++i)
+    intens.push_back(inte[i].asDouble());
 
-    setSpectrum(waves, intens);
-    // ###################
+  setSpectrum(waves, intens);
+  // ###################
 }
 
 IsotropicVolumeSource::~IsotropicVolumeSource() {
 }
 
 AbstractGeometry* IsotropicVolumeSource::startingObject() {
-    return (enclosingObject);
+  return (enclosingObject);
 }
 
 Ray IsotropicVolumeSource::generateRay() {
-    Ray ray;
-    _initialiseRay(ray);
-    // Calculate the theta and phi -angles for the
-    // generated ray.
-    double tht = acos(1.0 - 2.0 * rnd1());
-    double phi = rnd1() * 2.0 * M_PI;
-    // Here we assume that the new ray direction is
-    // calculated with respect to the (nominal) global
-    // z-axis.
-    ray.direction[0] = sin(tht) * cos(phi);
-    ray.direction[1] = sin(tht) * sin(phi);
-    ray.direction[2] = cos(tht);
-    //ray.direction = arma::normalise(ray.direction);
-    // Add location and wavelengths
-    ray.location = enclosingObject->randomPointInside();
-    return (ray);
+  Ray ray;
+  _initialiseRay(ray);
+  // Calculate the theta and phi -angles for the
+  // generated ray.
+  double tht = acos(1.0 - 2.0 * rnd1());
+  double phi = rnd1() * 2.0 * M_PI;
+  // Here we assume that the new ray direction is
+  // calculated with respect to the (nominal) global
+  // z-axis.
+  ray.direction[0] = sin(tht) * cos(phi);
+  ray.direction[1] = sin(tht) * sin(phi);
+  ray.direction[2] = cos(tht);
+  //ray.direction = arma::normalise(ray.direction);
+  // Add location and wavelengths
+  ray.location = enclosingObject->randomPointInside();
+  return (ray);
 }

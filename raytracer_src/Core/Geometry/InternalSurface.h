@@ -30,21 +30,21 @@ using namespace std;
  * Internal surface. Use only if this surface is only internal.
  * Should not touch or be adjacent to any other surface.
  */
-class InternalSurface: public RectSurface {
-  public:
-    InternalSurface(AbstractGeometry* theParent, Json::Value jsonData);
-    InternalSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
-    InternalSurface(AbstractGeometry* theParent, vertex position, vertex u,
-                    vertex v);
-    virtual ~InternalSurface();
+class InternalSurface : public RectSurface {
+ public:
+  InternalSurface(AbstractGeometry* theParent, Json::Value jsonData);
+  InternalSurface(AbstractGeometry* theParent, vector<vertex> theVertices);
+  InternalSurface(AbstractGeometry* theParent, vertex position, vertex u,
+                  vertex v);
+  virtual ~InternalSurface();
 
-    /**
-     * Propagates the ray through this surface.
-     *
-     *
-     * All receiveRay() of surfacePropreties are performed.
-     */
-    AbstractGeometry* propagateRay(Ray &ray, AbstractGeometry *fromObject);
+  /**
+   * Propagates the ray through this surface.
+   *
+   *
+   * All receiveRay() of surfacePropreties are performed.
+   */
+  AbstractGeometry* propagateRay(Ray &ray, AbstractGeometry *fromObject);
 };
 
 #endif /* INTERNALSURFACE_H_ */

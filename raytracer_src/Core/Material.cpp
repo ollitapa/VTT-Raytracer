@@ -17,30 +17,30 @@
 #include "Material.h"
 
 Material::Material() {
-    // TODO Auto-generated constructor stub
-    refractiveIndex = 1.0;
+  // TODO Auto-generated constructor stub
+  refractiveIndex = 1.0;
 }
 
 Material::~Material() {
-    // TODO Auto-generated destructor stub
+  // TODO Auto-generated destructor stub
 }
 
 void Material::interactWithRayContinuously(Ray &rayAtEnd) {
-    for (unsigned int i = 0; i < interactors.size(); i++) {
-        interactors[i]->performContinuousInteraction(rayAtEnd);
-    }
+  for (unsigned int i = 0; i < interactors.size(); i++) {
+    interactors[i]->performContinuousInteraction(rayAtEnd);
+  }
 }
 
 void Material::interactWithRay(Ray& ray) {
 }
 
 void Material::propagationDistance(Ray& ray) {
-    ray.length = INFINITY;
+  ray.length = INFINITY;
 }
 
 void Material::tracerDidEndTracing() {
 }
 
 void Material::addContinuousInteractor(ContinuousInteraction* actor) {
-    interactors.push_back(actor);
+  interactors.push_back(actor);
 }

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #ifndef ABSTRACTGEOMETRY_H_
 #define ABSTRACTGEOMETRY_H_
 
@@ -26,108 +25,104 @@
 #include "Material.h"
 #include "ClearMaterial.h"
 
-
 class AbstractGeometry {
-  public:
-    AbstractGeometry();
-    AbstractGeometry(const AbstractGeometry& other);
-    virtual ~AbstractGeometry();
-    virtual AbstractGeometry* propagateRay(Ray &ray,
-                                           AbstractGeometry *fromObject) = 0;
+ public:
+  AbstractGeometry();
+  AbstractGeometry(const AbstractGeometry& other);
+  virtual ~AbstractGeometry();
+  virtual AbstractGeometry* propagateRay(Ray &ray,
+                                         AbstractGeometry *fromObject) = 0;
 
-    /**
-     * Retuns a string that represents the object in STL-format.
-     * For solids, it is the following:
-     *
-     *  solid Name
-     *      facet normal ni nj nk
-     *          outer loop
-     *              vertex v1x v1y v1z
-     *              vertex v2x v2y v2z
-     *              vertex v3x v3y v3z
-     *          endloop
-     *      endfacet
-     *  endsolid Name
-     *
-     *  For surfaces it is the following:
-     *
-     *      facet normal ni nj nk
-     *          outer loop
-     *              vertex v1x v1y v1z
-     *              vertex v2x v2y v2z
-     *              vertex v3x v3y v3z
-     *          endloop
-     *      endfacet
-     *      facet normal ni nj nk
-     *          outer loop
-     *              vertex v1x v1y v1z
-     *              vertex v2x v2y v2z
-     *              vertex v3x v3y v3z
-     *          endloop
-     *      endfacet
-     *      .
-     *      .
-     *      .
-     *
-     *      see wikipedia: http://en.wikipedia.org/wiki/STL_%28file_format%29
-     */
-    virtual string stlRepresentation();
+  /**
+   * Retuns a string that represents the object in STL-format.
+   * For solids, it is the following:
+   *
+   *  solid Name
+   *      facet normal ni nj nk
+   *          outer loop
+   *              vertex v1x v1y v1z
+   *              vertex v2x v2y v2z
+   *              vertex v3x v3y v3z
+   *          endloop
+   *      endfacet
+   *  endsolid Name
+   *
+   *  For surfaces it is the following:
+   *
+   *      facet normal ni nj nk
+   *          outer loop
+   *              vertex v1x v1y v1z
+   *              vertex v2x v2y v2z
+   *              vertex v3x v3y v3z
+   *          endloop
+   *      endfacet
+   *      facet normal ni nj nk
+   *          outer loop
+   *              vertex v1x v1y v1z
+   *              vertex v2x v2y v2z
+   *              vertex v3x v3y v3z
+   *          endloop
+   *      endfacet
+   *      .
+   *      .
+   *      .
+   *
+   *      see wikipedia: http://en.wikipedia.org/wiki/STL_%28file_format%29
+   */
+  virtual string stlRepresentation();
 
-    /*
-     * Vertices of this object
-     */
-    vector<vertex> vertices;
+  /*
+   * Vertices of this object
+   */
+  vector<vertex> vertices;
 
-    /*
-     * Material of this object
-     */
-    Material *material;
+  /*
+   * Material of this object
+   */
+  Material *material;
 
-    AbstractGeometry* parent;
+  AbstractGeometry* parent;
 
-    /*
-     * Id that determines the hirearchy of the Geometry object.
-     */
-    double id();
+  /*
+   * Id that determines the hirearchy of the Geometry object.
+   */
+  double id();
 
+  /**
+   * Print operator
+   */
+  friend ostream& operator<<(ostream& os, const AbstractGeometry& geo);
 
-    /**
-    * Print operator
-    */
-    friend ostream& operator<<(ostream& os, const AbstractGeometry& geo);
+  /**
+   * Name of the object. Defaults to _id.
+   * Increased automatically at object instantiation.
+   */
+  string objName;
 
-    /**
-     * Name of the object. Defaults to _id.
-     * Increased automatically at object instantiation.
-     */
-    string objName;
+  /**
+   * Tracer calls this method when the tracing has ended.
+   */
+  virtual void tracerDidEndTracing();
 
-    /**
-     * Tracer calls this method when the tracing has ended.
-     */
-    virtual void tracerDidEndTracing();
+  /**
+   * Returns a random point inside the object.
+   */
+  virtual vertex randomPointInside();
 
-    /**
-     * Returns a random point inside the object.
-     */
-    virtual vertex randomPointInside();
+ protected:
 
-  protected:
+  static Material *_def_material;
 
-    static Material *_def_material;
+  /*
+   * Id that determines the hirearchy of the Geometry object.
+   * Increased automatically at object instantiation.
+   */
+  double _id;
 
-    /*
-     * Id that determines the hirearchy of the Geometry object.
-     * Increased automatically at object instantiation.
-     */
-    double  _id;
-
-    /*
-     * Next available id
-     */
-    static double _next_id;
-
-
+  /*
+   * Next available id
+   */
+  static double _next_id;
 
 };
 

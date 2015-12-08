@@ -20,13 +20,13 @@
 #include "AbstractGeometry.h"
 #include "Ray.h"
 
-class OblivionSurface: public AbstractGeometry {
-  public:
-    OblivionSurface();
-    virtual ~OblivionSurface();
-    AbstractGeometry* propagateRay(Ray& ray, AbstractGeometry* fromObject);
-    AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
-                                 AbstractGeometry* to);
+class OblivionSurface : public AbstractGeometry {
+ public:
+  OblivionSurface();
+  virtual ~OblivionSurface();
+  AbstractGeometry* propagateRay(Ray& ray, AbstractGeometry* fromObject);
+  AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
+                               AbstractGeometry* to);
 };
 
 #endif /* OBLIVIONSURFACE_H_ */

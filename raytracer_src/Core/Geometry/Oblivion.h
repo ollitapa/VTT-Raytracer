@@ -1,5 +1,4 @@
 /*
- * Copyright 2015 VTT Technical Research Center of Finland
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +24,14 @@
  * All rays will end in this object and the material
  * attached to it will be vacuum.
  */
-class Oblivion: public AbstractGeometry {
-  public:
-    Oblivion();
-    virtual ~Oblivion();
+class Oblivion : public AbstractGeometry {
+ public:
+  Oblivion();
+  virtual ~Oblivion();
 
-    AbstractGeometry* propagateRay(Ray &ray, AbstractGeometry *fromObject);
-    AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
-                                 AbstractGeometry* to);
+  AbstractGeometry* propagateRay(Ray &ray, AbstractGeometry *fromObject);
+  AbstractGeometry* receiveRay(Ray& ray, AbstractGeometry* from,
+                               AbstractGeometry* to);
 };
 
 #endif /* OBLIVION_H_ */

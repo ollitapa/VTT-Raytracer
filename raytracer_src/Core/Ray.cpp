@@ -32,16 +32,13 @@ Ray::~Ray() {
 }
 
 ostream& operator<<(ostream& os, Ray& ray) {
-  return (\
-          os << "Ray: {" << endl \
-          << "        length: " << ray.length << endl \
-          << "       rad pow: " << ray.radiantPower() << endl \
-          << "    wavelength: " << ray.wavelength << endl\
-          << "  wavelength_0: " << ray.wavelength_0 << endl\
-          << "     direction:\n" << ray.direction << endl \
-          << "      location:\n" << ray.location << endl \
-          << "}" << endl
-         );
+  return (os << "Ray: {" << endl << "        length: " << ray.length << endl
+      << "       rad pow: " << ray.radiantPower() << endl << "    wavelength: "
+      << ray.wavelength << endl\
+ << "  wavelength_0: " << ray.wavelength_0
+      << endl\
+ << "     direction:\n" << ray.direction << endl
+      << "      location:\n" << ray.location << endl << "}" << endl);
 }
 
 double Ray::radiantPower() {

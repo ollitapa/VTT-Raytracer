@@ -17,27 +17,26 @@
 #ifndef RAYTRACER_SRC_CORE_CONTINUOUSINTERACTION_H_
 #define RAYTRACER_SRC_CORE_CONTINUOUSINTERACTION_H_
 
-
 #include "Ray.h"
 
 class Material;
 
 class ContinuousInteraction {
-  public:
-    ContinuousInteraction(Material* host);
-    virtual ~ContinuousInteraction();
+ public:
+  ContinuousInteraction(Material* host);
+  virtual ~ContinuousInteraction();
 
-    /**
-     * This method is called allways after the ray has mode a
-     * distance ray.lenght. Superclass should not alter any other parameter
-     * than the flux and wavelength of the ray.
-     */
-    virtual void performContinuousInteraction(Ray& ray) = 0;
-    Material* host();
-    void setHost(Material* host);
+  /**
+   * This method is called allways after the ray has mode a
+   * distance ray.lenght. Superclass should not alter any other parameter
+   * than the flux and wavelength of the ray.
+   */
+  virtual void performContinuousInteraction(Ray& ray) = 0;
+  Material* host();
+  void setHost(Material* host);
 
-  protected:
-    Material* _host;
+ protected:
+  Material* _host;
 };
 
 #endif /* RAYTRACER_SRC_CORE_CONTINUOUSINTERACTION_H_ */

@@ -17,26 +17,26 @@
 #include "SurfaceProperty.h"
 
 SurfaceProperty::SurfaceProperty() {
-    _hierarchy = -1;
-    _cooperation_level = -1;
+  _hierarchy = -1;
+  _cooperation_level = -1;
 }
 
 SurfaceProperty::~SurfaceProperty() {
-    // TODO Auto-generated destructor stub
+  // TODO Auto-generated destructor stub
 }
 
 AbstractGeometry* SurfaceProperty::receiveRay(Ray& ray, Surface* surface,
-        AbstractGeometry* from,
-        AbstractGeometry* to) {
-    cout << "Blank Surf" << endl;
-    return (to);
+                                              AbstractGeometry* from,
+                                              AbstractGeometry* to) {
+  cout << "Blank Surf" << endl;
+  return (to);
 }
 
 int SurfaceProperty::hierarchy() const {
-    return _hierarchy;
+  return _hierarchy;
 }
 int SurfaceProperty::cooperationLevel() const {
-    return (_cooperation_level);
+  return (_cooperation_level);
 }
 
 void SurfaceProperty::tracerDidEndTracing() {

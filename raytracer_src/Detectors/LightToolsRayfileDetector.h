@@ -32,32 +32,31 @@ using namespace std;
  * Generates a Light Tools readable ray source file for the surface
  * this detector is attached.
  */
-class LightToolsRayfileDetector: public SurfaceProperty {
-  public:
-    LightToolsRayfileDetector(Json::Value jsonData);
-    virtual ~LightToolsRayfileDetector();
-    AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
-                                 AbstractGeometry* from,
-                                 AbstractGeometry* to);
-    virtual void tracerDidEndTracing();
-  private:
-    ofstream _file;
-    static unsigned int _count;
-    unsigned int _rayNum;
-    mutex _savingMutex;
+class LightToolsRayfileDetector : public SurfaceProperty {
+ public:
+  LightToolsRayfileDetector(Json::Value jsonData);
+  virtual ~LightToolsRayfileDetector();
+  AbstractGeometry* receiveRay(Ray& ray, Surface* surface,
+                               AbstractGeometry* from, AbstractGeometry* to);
+  virtual void tracerDidEndTracing();
+ private:
+  ofstream _file;
+  static unsigned int _count;
+  unsigned int _rayNum;
+  mutex _savingMutex;
 
-    string _specFilename;
-    string _rayFilename;
-    string _rayTmpFilename;
-    ofstream _rayTmpFile;
-    bool _stopRays;
+  string _specFilename;
+  string _rayFilename;
+  string _rayTmpFilename;
+  ofstream _rayTmpFile;
+  bool _stopRays;
 
-    arma::vec* _wavelengths;
-    arma::vec* _intensities;
+  arma::vec* _wavelengths;
+  arma::vec* _intensities;
 
-    float _cumulativeRadiantPower;
+  float _cumulativeRadiantPower;
 
-    int _includeOnlyNormalDir;
+  int _includeOnlyNormalDir;
 };
 
 #endif /* RAYTRACER_SRC_DETECTORS_LIGHTTOOLSRAYFILEDETECTOR_H_ */

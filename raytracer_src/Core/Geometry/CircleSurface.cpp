@@ -16,15 +16,13 @@
 
 #include "CircleSurface.h"
 
-CircleSurface::CircleSurface(AbstractGeometry* theParent,
-                             vertex theCenter,
-                             double theRadius,
-                             vertex theNormal)
+CircleSurface::CircleSurface(AbstractGeometry* theParent, vertex theCenter,
+                             double theRadius, vertex theNormal)
     : Surface(theParent) {
-    // TODO Auto-generated constructor stub
-    center = theCenter;
-    radius = theRadius;
-    _normal = theNormal;
+  // TODO Auto-generated constructor stub
+  center = theCenter;
+  radius = theRadius;
+  _normal = theNormal;
 }
 
 CircleSurface::~CircleSurface() {
@@ -32,42 +30,43 @@ CircleSurface::~CircleSurface() {
 
 bool CircleSurface::rayIntersects(Ray &ray, double& atDistance,
                                   AbstractGeometry* fromObject) {
-    atDistance = 0;
+  atDistance = 0;
 
-    if (fromObject == this)
-        return (false);
+  if (fromObject == this)
+    return (false);
 
-    // Plane intersection by wikipedia:
-    // http://en.wikipedia.org/wiki/Line%E2%80%93plane_intersection
-    vertex p0 = center;
-    vertex l = ray.direction;
-    vertex l0 = ray.location;
-    vertex n = normal(ray.location);
-    // Calculate parts of a divide
-    double up = arma::dot(p0 - l0, n);
-    double down = arma::dot(l, n);
+  // Plane intersection by wikipedia:
+  // http://en.wikipedia.org/wiki/Line%E2%80%93plane_intersection
+  vertex p0 = center;
+  vertex l = ray.direction;
+  vertex l0 = ray.location;
+  vertex n = normal(ray.location);
+  // Calculate parts of a divide
+  double up = arma::dot(p0 - l0, n);
+  double down = arma::dot(l, n);
 
-    // Check if parallel or totally inside plane
-    if (down < SMALL_EPSILON && down > -SMALL_EPSILON)
-        return (false);
+  // Check if parallel or totally inside plane
+  if (down < SMALL_EPSILON && down > -SMALL_EPSILON)
+    return (false);
 
-    // Calculate distance
-    atDistance = up / down;
+  // Calculate distance
+  atDistance = up / down;
 
-    // Check that it is not behind the line
-    if (atDistance <= -SMALL_EPSILON)
-        return (false);
+  // Check that it is not behind the line
+  if (atDistance <= -SMALL_EPSILON)
+    return (false);
 
-    // Check that the location of intersection is inside the circle.
-    double dRayCenter = arma::norm(ray.location + ray.direction * atDistance - p0);
+  // Check that the location of intersection is inside the circle.
+  double dRayCenter = arma::norm(
+      ray.location + ray.direction * atDistance - p0);
 #ifdef DEBUG_VERBOSE
-    cout << "Circle at: " << atDistance << endl;
-    cout << "Ray distance to circle center :" << dRayCenter << endl;
+  cout << "Circle at: " << atDistance << endl;
+  cout << "Ray distance to circle center :" << dRayCenter << endl;
 #endif
 
-    if (dRayCenter <= radius)
-        return (true);
+  if (dRayCenter <= radius)
+    return (true);
 
-    return (false);
+  return (false);
 }
 

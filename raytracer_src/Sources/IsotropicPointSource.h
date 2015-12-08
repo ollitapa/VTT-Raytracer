@@ -22,25 +22,25 @@
 #include "Ray.h"
 #include "json.h"
 
-class IsotropicPointSource: public Source {
-  public:
-    IsotropicPointSource(Solid* theEnclosingObject, uint64_t n_rays);
-    IsotropicPointSource(Json::Value jsonData, Solid* theEnclosingObject);
+class IsotropicPointSource : public Source {
+ public:
+  IsotropicPointSource(Solid* theEnclosingObject, uint64_t n_rays);
+  IsotropicPointSource(Json::Value jsonData, Solid* theEnclosingObject);
 
-    virtual ~IsotropicPointSource();
+  virtual ~IsotropicPointSource();
 
-    AbstractGeometry* startingObject();
-    /**
-     * This method will generate rays from this source.
-     * The rays are pointed to direction member.
-     *
-     */
-    virtual Ray generateRay();
+  AbstractGeometry* startingObject();
+  /**
+   * This method will generate rays from this source.
+   * The rays are pointed to direction member.
+   *
+   */
+  virtual Ray generateRay();
 
-    /**
-     * Location of the source.
-     */
-    vertex location;
+  /**
+   * Location of the source.
+   */
+  vertex location;
 };
 
 #endif /* ISOTROPICPOINTSOURCE_H_ */

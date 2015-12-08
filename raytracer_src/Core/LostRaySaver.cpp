@@ -18,45 +18,45 @@
 LostRaySaver* LostRaySaver::instance = NULL;
 
 LostRaySaver::LostRaySaver() {
-    _count = 0;
-    // Filename for datector
-    string fname = "LostRays.bin";
-    _file.open(fname.c_str(), ios::out | ios::binary);
-    // Write header
-    string header =
-        "Lost rays that reached the end of iterations\n"
-        "                                            \n"
-        "Version: 1                                  \n"
-        "                                            \n"
-        "format:                                     \n"
-        "char header[299],radpwr[f8],wavelength[f8],location[3,f8],direction[3,f8]\n";
-    cout << header << endl;
-    cout << header.size() << endl;
-    exit(-1);
-    _file.write(header.c_str(), 299);
+  _count = 0;
+  // Filename for datector
+  string fname = "LostRays.bin";
+  _file.open(fname.c_str(), ios::out | ios::binary);
+  // Write header
+  string header =
+      "Lost rays that reached the end of iterations\n"
+          "                                            \n"
+          "Version: 1                                  \n"
+          "                                            \n"
+          "format:                                     \n"
+          "char header[299],radpwr[f8],wavelength[f8],location[3,f8],direction[3,f8]\n";
+  cout << header << endl;
+  cout << header.size() << endl;
+  exit(-1);
+  _file.write(header.c_str(), 299);
 }
 
 LostRaySaver::~LostRaySaver() {
 }
 
 void LostRaySaver::saveRay(Ray& ray) {
-    _savingMutex.lock();
-    double p = ray.radiantPower();
-    _file.write((char*)&p, 8);
-    _file.write((char*)&ray.wavelength, 8);
-    _file.write((char*)&ray.location[0] , 8);
-    _file.write((char*)&ray.location[1] , 8);
-    _file.write((char*)&ray.location[2] , 8);
-    _file.write((char*)&ray.direction[0] , 8);
-    _file.write((char*)&ray.direction[1] , 8);
-    _file.write((char*)&ray.direction[2] , 8);
-    _count++;
-    _savingMutex.unlock();
+  _savingMutex.lock();
+  double p = ray.radiantPower();
+  _file.write((char*) &p, 8);
+  _file.write((char*) &ray.wavelength, 8);
+  _file.write((char*) &ray.location[0], 8);
+  _file.write((char*) &ray.location[1], 8);
+  _file.write((char*) &ray.location[2], 8);
+  _file.write((char*) &ray.direction[0], 8);
+  _file.write((char*) &ray.direction[1], 8);
+  _file.write((char*) &ray.direction[2], 8);
+  _count++;
+  _savingMutex.unlock();
 }
 
 void LostRaySaver::endTracing() {
-    _file.close();
+  _file.close();
 
-    if (_count == 0)
-        remove("LostRays.bin");
+  if (_count == 0)
+    remove("LostRays.bin");
 }
