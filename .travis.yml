@@ -1,0 +1,20 @@
+language: cpp
+
+os:
+  - linux
+
+compiler:
+  - gcc
+
+
+before_install: true
+
+install: 
+  - sudo apt-get install libhdf5-serial-dev armadillo
+
+before_script: true
+
+script:
+  - cd travis-test-tracer
+  - make config=release
+ 
