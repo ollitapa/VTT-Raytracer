@@ -2,9 +2,9 @@
 hdf5_link = "hdf5_serial"
 thread_link = "pthread"
 print(os.get())
---if os.get() == "windows" then
---  hdf5_link = "hdf5"
---end
+if os.get() == "windows" then
+  hdf5_link = "hdf5"
+end
 if os.get() == "macosx" then
   hdf5_link = "hdf5"
 end

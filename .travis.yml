@@ -14,6 +14,7 @@ addons:
       - libhdf5-serial-dev
       - cmake
       - liblapack-dev
+      - premake4
       
 before_install:
   - wget http://sourceforge.net/projects/arma/files/armadillo-6.300.2.tar.gz
@@ -28,5 +29,6 @@ before_script: true
 
 script:
   - cd travis-test-tracer
+  - premake4 gmake
   - make config=release
  
