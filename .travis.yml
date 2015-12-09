@@ -20,6 +20,8 @@ before_install:
   - tar -xzvf armadillo-6.300.2.tar.gz
   - mkdir arma
   - cd armadillo-6.300.2 && cmake . && make && make install DESTDIR=../arma
+  - cd ..
+  - ls
   
 
 before_script: true
