@@ -27,7 +27,15 @@ solution "MyApplication"
               "../raytracer_src/**.cpp",
           }
 
-      includedirs {"../raytracer_src/**", "/usr/include/hdf5/serial"}
+      includedirs {"../raytracer_src/**",
+                   "../arma/usr/",
+                   "../arma/usr/include/",
+                   "../arma/usr/include/armadillo_bits",
+                   "../arma/usr/share/Armadillo/CMake",
+                   "/usr/include/hdf5/serial"}
+      libdirs {
+          "../arma/usr/lib/"
+          }
       excludes{
                "../raytracer_src/Detectors/IrradianceDetector**"}
 

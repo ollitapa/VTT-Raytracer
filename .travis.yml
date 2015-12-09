@@ -1,16 +1,26 @@
 language: cpp
 
+sudo: false
+
 os:
   - linux
 
 compiler:
   - gcc
-
-
-before_install: true
-
-install: 
-  - sudo apt-get install libhdf5-serial-dev armadillo
+  
+addons:
+  apt:
+    packages:
+      - libhdf5-serial-dev
+      - cmake
+      - liblapack-dev
+      
+before_install:
+  - wget http://sourceforge.net/projects/arma/files/armadillo-6.300.2.tar.gz
+  - tar -xzvf armadillo-6.300.2.tar.gz
+  - mkdir arma
+  - cd armadillo-6.300.2 && cmake . && make && make install DESTDIR=../arma
+  
 
 before_script: true
 

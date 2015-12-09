@@ -24,12 +24,12 @@ ifeq ($(config),debug)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/tracer.exe
   DEFINES   += -DDEBUG -DARMA_DONT_PRINT_ERRORS -DSAVERAYS
-  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I/usr/include/hdf5/serial
+  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I../arma/usr -I../arma/usr/include -I../arma/usr/include/armadillo_bits -I../arma/usr/share/Armadillo/CMake -I/usr/include/hdf5/serial
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCH) -g -Wall -W -std=c++11
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L.
+  ALL_LDFLAGS   += $(LDFLAGS) -L../arma/usr/lib -L.
   LDDEPS    +=
   LIBS      += $(LDDEPS) -larmadillo -lhdf5_serial -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
@@ -46,12 +46,12 @@ ifeq ($(config),release)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/tracer.exe
   DEFINES   += -DNDEBUG -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DSAVERAYS
-  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I/usr/include/hdf5/serial
+  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I../arma/usr -I../arma/usr/include -I../arma/usr/include/armadillo_bits -I../arma/usr/share/Armadillo/CMake -I/usr/include/hdf5/serial
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCH) -O3 -msse -msse2 -std=c++11
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L. -s
+  ALL_LDFLAGS   += $(LDFLAGS) -L../arma/usr/lib -L. -s
   LDDEPS    +=
   LIBS      += $(LDDEPS) -larmadillo -lhdf5_serial -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
@@ -68,12 +68,12 @@ ifeq ($(config),debug_verbose)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/tracer.exe
   DEFINES   += -DDEBUG -DARMA_DONT_PRINT_ERRORS -DDEBUG_SOLIDPROPAGATION -DDEBUG_VERBOSE -D DEBUG_RAYINTERSECT -DSAVERAYS
-  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I/usr/include/hdf5/serial
+  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I../arma/usr -I../arma/usr/include -I../arma/usr/include/armadillo_bits -I../arma/usr/share/Armadillo/CMake -I/usr/include/hdf5/serial
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCH) -g -Wall -W -std=c++11
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L.
+  ALL_LDFLAGS   += $(LDFLAGS) -L../arma/usr/lib -L.
   LDDEPS    +=
   LIBS      += $(LDDEPS) -larmadillo -lhdf5_serial -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
@@ -90,12 +90,12 @@ ifeq ($(config),releasenorays)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/tracer-no-ray-save.exe
   DEFINES   += -DNDEBUG -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG
-  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I/usr/include/hdf5/serial
+  INCLUDES  += -I../raytracer_src/Core -I../raytracer_src/Detectors -I../raytracer_src/json-parser -I../raytracer_src/MaterialProperties -I../raytracer_src/Materials -I../raytracer_src/Sources -I../raytracer_src/SurfaceProperties -I../raytracer_src/Core/Geometry -I../raytracer_src/json-parser/json -I../arma/usr -I../arma/usr/include -I../arma/usr/include/armadillo_bits -I../arma/usr/share/Armadillo/CMake -I/usr/include/hdf5/serial
   ALL_CPPFLAGS  += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS    += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCH) -O3 -msse -msse2 -std=c++11
   ALL_CXXFLAGS  += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  ALL_LDFLAGS   += $(LDFLAGS) -L. -s
+  ALL_LDFLAGS   += $(LDFLAGS) -L../arma/usr/lib -L. -s
   LDDEPS    +=
   LIBS      += $(LDDEPS) -larmadillo -lhdf5_serial -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
