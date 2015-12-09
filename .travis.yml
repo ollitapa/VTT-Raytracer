@@ -1,6 +1,6 @@
 language: cpp
 
-sudo: false
+sudo: require
 
 os:
   - linux
@@ -8,15 +8,16 @@ os:
 compiler:
   - gcc
   
-addons:
-  apt:
-    packages:
-      - libhdf5-serial-dev
-      - cmake
-      - liblapack-dev
-      - premake4
+#addons:
+#  apt:
+#    packages:
+#      - libhdf5-serial-dev
+#      - cmake
+#      - liblapack-dev
       
 before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install --force-yes make premake4 liblapack-dev cmake libhdf5-serial-dev
   - wget http://sourceforge.net/projects/arma/files/armadillo-6.300.2.tar.gz
   - tar -xzvf armadillo-6.300.2.tar.gz
   - mkdir arma
@@ -24,7 +25,7 @@ before_install:
   - cd ..
   - ls
   
-
+  
 before_script: true
 
 script:
