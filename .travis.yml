@@ -13,9 +13,7 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - libhdf5-dev
-      - libhdf5-8
-      - libhdf5-cpp-8
+      - libhdf5-serial-dev
       - cmake
       - liblapack-dev
       - gcc-4.8
@@ -41,6 +39,5 @@ before_script: true
 script:
   - cd travis-test-tracer
   - premake4 gmake
-  - cat tracer.make
   - make config=release
  

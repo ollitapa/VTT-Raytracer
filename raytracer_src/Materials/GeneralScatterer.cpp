@@ -38,7 +38,7 @@ GeneralScatterer::GeneralScatterer(Json::Value jsonData) {
   cout << "File open... " << endl;
   // Load wavelengths used
   cout << "Loading wavelengths... " << endl;
-  hid_t dset = H5Dopen1(file_id, "wavelengths");
+  hid_t dset = H5Dopen2(file_id, "wavelengths", H5P_DEFAULT);
   hid_t dataspace = H5Dget_space(dset);
   unsigned int ndims = H5Sget_simple_extent_ndims(dataspace);
   hsize_t dsetDims[ndims];
@@ -50,7 +50,7 @@ GeneralScatterer::GeneralScatterer(Json::Value jsonData) {
   // *wavelenghts_0 = 1000.0 * (*wavelenghts_0) ; // In nanometers
   // Read particle IDs
   cout << "Loading particleIDs... " << endl;
-  hid_t dataset_id = H5Dopen1(file_id, "/particleID");
+  hid_t dataset_id = H5Dopen2(file_id, "/particleID", H5P_DEFAULT);
   dataspace = H5Dget_space(dataset_id);
   ndims = H5Sget_simple_extent_ndims(dataspace);
   hsize_t dims[ndims];
@@ -62,7 +62,7 @@ GeneralScatterer::GeneralScatterer(Json::Value jsonData) {
   cout << "particle count: " << dims[0] << endl;
   // Now load data for each particle id
   cout << "Loading particleData... " << endl;
-  hid_t group = H5Gopen(file_id, "particleData", H5P_DEFAULT);
+  hid_t group = H5Gopen2(file_id, "particleData", H5P_DEFAULT);
 
   for (unsigned int i = 0; i < v.size(); ++i) {
     stringstream ss;
@@ -70,8 +70,8 @@ GeneralScatterer::GeneralScatterer(Json::Value jsonData) {
     string idx = ss.str();
     cout << "Loading particle id: " << idx << endl;
     cout << "Inverse CDF..." << endl;
-    hid_t p_group = H5Gopen(group, idx.c_str(), H5P_DEFAULT);
-    hid_t invCDF = H5Dopen1(p_group, "inverseCDF");
+    hid_t p_group = H5Gopen2(group, idx.c_str(), H5P_DEFAULT);
+    hid_t invCDF = H5Dopen2(p_group, "inverseCDF", H5P_DEFAULT);
     dataspace = H5Dget_space(invCDF);
     ndims = H5Sget_simple_extent_ndims(dataspace);
     hsize_t dimsCDF[ndims];
@@ -90,7 +90,7 @@ GeneralScatterer::GeneralScatterer(Json::Value jsonData) {
     _inverseThetaCDF.push_back(m);
     delete buf2;
     cout << "Cross sections..." << endl;
-    hid_t crossS = H5Dopen1(p_group, "crossSections");
+    hid_t crossS = H5Dopen2(p_group, "crossSections", H5P_DEFAULT);
     dataspace = H5Dget_space(crossS);
     ndims = H5Sget_simple_extent_ndims(dataspace);
     hsize_t crossSDims[ndims];
