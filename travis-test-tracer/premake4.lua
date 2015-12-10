@@ -1,13 +1,8 @@
 -- hdf5 linking is different in windows and ubuntu
-hdf5_link = "hdf5_serial"
+hdf5_link = "hdf5"
 thread_link = "pthread"
 print(os.get())
-if os.get() == "windows" then
-  hdf5_link = "hdf5"
-end
-if os.get() == "macosx" then
-  hdf5_link = "hdf5"
-end
+
 
 --  ugly hack to use gcc-4.8
 premake.gcc.cc  = 'gcc-4.8'
