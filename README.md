@@ -2,6 +2,13 @@
 
 This is a yet another ray tracer program. It may not be the fastest and may not be the easiest to understand.
 
+|  Project status:  |    |
+| ------------- | ------------- |
+| License | [![Build Status](https://img.shields.io/badge/license-Apache%20License%2C%20Version%202.0-blue.svg)](https://github.com/ollitapa/VTT-Raytracer/blob/master/LICENSE)  |
+| Build Status | [![Build Status](https://travis-ci.org/ollitapa/VTT-Raytracer.svg?branch=master)](https://travis-ci.org/ollitapa/VTT-Raytracer)  |
+
+
+
 # Installation
 
 ## Preinstalls for building source
@@ -20,10 +27,11 @@ http://en.cppreference.com/w/c/thread
 Required packages:
 
    * make
+   * cmake
    * g++
    * lapack
    * qhull (This is for STL-geometry creation)
-   * libhdf5-devel
+   * libhdf5-serial-dev
    * doxygen (for class documentation)
    * graphviz (for class documentation)
 
@@ -41,6 +49,9 @@ premake4 gmake
 make config=release
 sudo premake4 install
 ```
+
+If you encounter HDF5 errors like ```/usr/bin/ld: cannot find -lhdf5_serial``` and are sure that you installed libhdf5-serial-dev, you can try to edit the  ```Tracer/premake.lua``` at line 2,6 and 9. Try using linker flags ```hdf5```, ```hdf5_serial``` or ```hdf5_cpp``` and run the premake4 again.
+
 For faster executable without saving of the traced rays use:
 ```bash
 premake4 gmake
