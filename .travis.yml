@@ -39,5 +39,6 @@ before_script: true
 script:
   - cd travis-test-tracer
   - premake4 gmake
+  - cat tracer.make
   - make config=release
  

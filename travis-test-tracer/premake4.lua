@@ -9,7 +9,9 @@ if os.get() == "macosx" then
   hdf5_link = "hdf5"
 end
 
-
+--  ugly hack to use gcc-4.8
+premake.gcc.cc  = 'gcc-4.8'
+premake.gcc.cxx = 'g++-4.8'
 
 
 -- A solution contains projects, and defines the available configurations
