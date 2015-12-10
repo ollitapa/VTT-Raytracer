@@ -28,7 +28,7 @@ before_install:
   - mkdir arma
   - cd armadillo-6.300.2 && cmake . && make && make install DESTDIR=../arma
   - cd ..
-  - ls
+  - sudo ldconfig -p | grep libhdf
   
 install:
 # Use g++4.8 and not 4.6 (C++11 missing)
