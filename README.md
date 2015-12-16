@@ -116,4 +116,6 @@ https://pypi.python.org/pypi/autopep8/1.1.1
 
 # Acknowledgements
 
+Original project team: Olli Tapaninen, Petri Myöhänen, Juuso Olkkonen.
+
 This research has received funding from the European Union's 7th Framework Programme (FP7-NMP) under NMP-2013-1.4-1 with grant agreement no. 604279
