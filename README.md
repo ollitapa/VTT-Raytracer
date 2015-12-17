@@ -42,27 +42,27 @@ Required packages:
 
 ## Building Source
 
-1. Build source. Go to ```Tracer/```
+1. Build source. On main source folder:
 
 ```bash
 premake4 gmake
 make config=release
-sudo premake4 install
+sudo make install config=release
 ```
 
-If you encounter HDF5 errors like ```/usr/bin/ld: cannot find -lhdf5_serial``` and are sure that you installed libhdf5-serial-dev, you can try to edit the  ```Tracer/premake.lua``` at line 2,6 and 9. Try using linker flags ```hdf5```, ```hdf5_serial``` or ```hdf5_cpp``` and run the premake4 again.
+If you encounter HDF5 errors like ```/usr/bin/ld: cannot find -lhdf5_serial``` and are sure that you installed libhdf5-serial-dev, you can try to edit the  ```Tracer/premake.lua``` at line 2 and 12. Try using linker flags ```hdf5```, ```hdf5_serial``` or ```hdf5_cpp``` and run the premake4 again.
 
 For faster executable without saving of the traced rays use:
 ```bash
 premake4 gmake
 make config=releasenorays
-sudo premake4 install
+sudo make install config=releasenorays
 ```
 For Windows MSYS2 use:
 ```bash
 premake4 gmake
 mingw32-make config=releasenorays
-sudo premake4 --DESTDIR=/usr/bin install
+sudo mingw32-make install config=releasenorays --bindir=/usr/bin
 ```
 
 If you want the debug parameters to print out use:
@@ -115,5 +115,7 @@ https://pypi.python.org/pypi/autopep8/1.1.1
 
 
 # Acknowledgements
+
+Original project team: Olli Tapaninen, Petri Myöhänen, Juuso Olkkonen.
 
 This research has received funding from the European Union's 7th Framework Programme (FP7-NMP) under NMP-2013-1.4-1 with grant agreement no. 604279
