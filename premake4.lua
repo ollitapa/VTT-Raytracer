@@ -14,10 +14,6 @@ end
 
 
 
---  ugly hack to use gcc-4.8
-premake.gcc.cc  = 'gcc-4.8'
-premake.gcc.cxx = 'g++-4.8'
-
 
 -- A solution contains projects, and defines the available configurations
 solution "MyApplication"
@@ -29,30 +25,11 @@ solution "MyApplication"
       language "C++"
       files { "**.h",
               "**.cpp",
-              "Tracer/**.cpp",
-              "raytracer_src/**.cpp",
-              "raytracer_src/**.cpp",
-          }
-
-      kind "ConsoleApp"
-      language "C++"
-      files { "**.h",
-              "**.cpp",
               "raytracer_src/**.cpp",
               "raytracer_src/**.cpp",
           }
 
       includedirs {"raytracer_src/**", "/usr/include/hdf5/serial"}
-
-      includedirs {"raytracer_src/**",
-                   "arma/usr/",
-                   "arma/usr/include/",
-                   "arma/usr/include/armadillo_bits",
-                   "arma/usr/share/Armadillo/CMake",
-                   "/usr/include/hdf5/serial"}
-      libdirs {
-          "arma/usr/lib/"
-          }
       excludes{
                "raytracer_src/Detectors/IrradianceDetector**",
                "Tests/IrradianceDetectorTest**"}
@@ -85,7 +62,6 @@ solution "MyApplication"
          flags { "OptimizeSpeed", "EnableSSE", "EnableSSE2"}
          buildoptions {"-std=c++11"}
          targetname ("tracer-no-ray-save")
-
 
 --
 -- Rename gmake action into _gmake
