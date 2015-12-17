@@ -29,7 +29,7 @@ solution "MyApplication"
       language "C++"
       files { "**.h",
               "**.cpp",
-              "../**.cpp",
+              "../tracer.cpp",
               "../raytracer_src/**.cpp",
               "../raytracer_src/**.cpp",
           }
