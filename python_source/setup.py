@@ -55,6 +55,6 @@ setup(name='pyraytracer',
       author_email='olli.tapaninen@gmail.com',
       package_dir=packages,
       packages=packages.keys(),
-      requires=['numpy', 'pandas', 'matplotlib', 'colorTools'],
+      requires=['numpy', 'pandas', 'matplotlib', 'pycolortools'],
       scripts=[]
       )

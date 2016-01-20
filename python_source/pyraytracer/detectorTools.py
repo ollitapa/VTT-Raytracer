@@ -13,14 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import colorTools
+import pycolortools
 import numpy as np
 import pandas as pd
 
 from . import fileTools as ft
 from . import signalSmoothing as sm
 
-cie = colorTools.CIEXYZ()
+cie = pycolortools.CIEXYZ()
 
 
 def groupSpectrum(df, bin_w=1.0):
