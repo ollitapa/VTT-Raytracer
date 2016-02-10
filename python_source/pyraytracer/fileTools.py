@@ -51,11 +51,18 @@ def loadDetectorData(filepath, orig=[0, 0, 0]):
                                      'direction': genArray})
 
     points = np.array(list(df['location'].values))
-    # print(points)
-    # Center coordinates
-    df['x'] = points[:, 0] - orig[0]
-    df['y'] = points[:, 1] - orig[1]
-    df['z'] = points[:, 2] - orig[2]
+    
+    if len(points.shape) < 2:
+        print('Detector file empty: %s'%filepath)
+        df['x'] = np.array([])
+        df['y'] = np.array([])
+        df['z'] = np.array([])
+    else:
+        # Center coordinates
+        df['x'] = points[:, 0] - orig[0]
+        df['y'] = points[:, 1] - orig[1]
+        df['z'] = points[:, 2] - orig[2]
+    
     del df['location']
 
     return(df)
