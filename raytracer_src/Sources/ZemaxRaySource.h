@@ -22,6 +22,22 @@
 #include "Ray.h"
 #include "json.h"
 #include "Common.h"
+#include <fstream>
+#include <mutex>
+
+#define MAX_ZEMAX_RAY_BUFFER_SIZE 100000
+//#define MAX_ZEMAX_RAY_BUFFER_SIZE 10
+
+struct RayData {
+  float flux;
+  float wavelength;
+  float x;
+  float y;
+  float z;
+  float i;// Direction x
+  float j;// Direction y
+  float k;// Direction z
+};
 
 class ZemaxRaySource : public Source {
  public:
@@ -38,6 +54,51 @@ class ZemaxRaySource : public Source {
    *
    */
   virtual Ray generateRay();
+
+ private:
+  /*
+   * Buffer for rays. Refilled when empty.
+   */
+  vector<RayData> _rayBuffer;
+
+  /**
+   * Mutex for loading rays
+   */
+  mutex _loadMutex;
+
+  /**
+   * Flux of the combined set of rays. Header info.
+   */
+  float _sourceFlux;
+
+  /**
+   *  Total flux of the rays combined. Updated everytime a ray is loaded.
+   *
+   */
+  double _fluxSum;
+  /**
+   * Fill the raybuffer from file.
+   */
+  void _fillRayBuffer();
+
+  /**
+   * Filestream of the ray file.
+   */
+  ifstream f;
+
+
+  unsigned int _rayNumber;
+
+  /**
+   * Number whether a spectral ray data should be used.
+   */
+  bool _spectral;
+
+  /**
+   * Conversion coefficient to meters.
+   */
+  double _unit;
+
 
 };
 

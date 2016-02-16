@@ -75,7 +75,13 @@ double rnd1();
  */
 template<typename Type>
 Type rndrangeDouble(Type min, Type max) {
+
+#ifdef __APPLE__// TODO: Apple does not suppor thread_local. Random generation compromized.
+  static std::mt19937 generator(rndSeed());
+#else
   static thread_local std::mt19937 generator(rndSeed());
+#endif
+  
   std::uniform_real_distribution < Type > distribution(min, max);
   return distribution(generator);
 }
@@ -87,7 +93,13 @@ Type rndrangeDouble(Type min, Type max) {
  */
 template<typename Type2>
 Type2 rndrangeInt(Type2 min, Type2 max) {
+
+#ifdef __APPLE__// TODO: Apple does not suppor thread_local. Random generation compromized.
+  static std::mt19937 generator(rndSeed());
+#else
   static thread_local std::mt19937 generator(rndSeed());
+#endif
+
   std::uniform_int_distribution < Type2 > distribution(min, max);
   return distribution(generator);
 }

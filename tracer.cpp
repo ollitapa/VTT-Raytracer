@@ -367,12 +367,13 @@ int main(int argc, char** argv) {
       a = new IsotropicVolumeSource(item,
                                     dynamic_cast<Solid*>(geometries[insideof]));
 
-    } else if (item["type"] == "ZemaxRay") {
+    } else if (item["type"] == "ZemaxRayfile") {
       cout << "Zemax ray source" << endl;
       a = new ZemaxRaySource(item, dynamic_cast<Solid*>(geometries[insideof]));
 
     } else {
-      cout << item << endl << "Type not supported!" << endl;
+      cout << item << endl << "Source type not supported!" << endl;
+      exit(-1);
     }
 
     // Add object to array.
