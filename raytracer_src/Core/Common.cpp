@@ -20,7 +20,7 @@ unsigned rndSeed() {
   // Generators for seeding random generators for each thread.
   static random_device rd;
   static mt19937 twister(
-      std::chrono::system_clock::now().time_since_epoch().count());
+    std::chrono::system_clock::now().time_since_epoch().count());
   // Use random_device only if it is implemented non-deterministically.
   unsigned seed = rd();
 
@@ -38,9 +38,15 @@ unsigned rndSeed() {
 }
 
 double rnd1() {
+#ifdef __APPLE__ // TODO: Apple does not suppor thread_local. Random generation compromized.
+  static std::mt19937 generator(rndSeed());
+  static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+#else
   static thread_local std::mt19937 generator(rndSeed());
   static thread_local std::uniform_real_distribution<double> distribution(0.0,
-                                                                          1.0);
+      1.0);
+#endif
+
   return distribution(generator);
 }
 
@@ -124,7 +130,7 @@ vec RotateX(vec& k, double val) {
   mat A;
   // Construct rotation matrix
   A << 1 << 0 << 0 << endr << 0 << cos(val) << -sin(val) << endr << 0
-      << sin(val) << cos(val) << endr;
+    << sin(val) << cos(val) << endr;
   return A * k;
 }
 
@@ -132,7 +138,7 @@ vec RotateY(vec& k, double val) {
   mat A;
   // Construct rotation matrix
   A << cos(val) << 0 << sin(val) << endr << 0 << 1 << 0 << endr << -sin(val)
-      << 0 << cos(val) << endr;
+    << 0 << cos(val) << endr;
   return A * k;
 }
 
@@ -140,7 +146,7 @@ vec RotateZ(vec& k, double val) {
   mat A;
   // Construct rotation matrix
   A << cos(val) << -sin(val) << 0 << endr << sin(val) << cos(val) << 0 << endr
-      << 0 << 0 << 1 << endr;
+    << 0 << 0 << 1 << endr;
   return A * k;
 }
 

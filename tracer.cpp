@@ -58,6 +58,7 @@
 #include "ZemaxRayfileDetector.h"
 #include "LightToolsRayfileDetector.h"
 #include "IsotropicConicalPointSource.h"
+#include "ZemaxRaySource.h"
 
 /**
  * Raytracer program.
@@ -78,7 +79,7 @@ int main(int argc, char** argv) {
   if (!parsingSuccessful) {
     // report to the user the failure and their locations in the document.
     std::cout << "Failed to parse configuration\n"
-        << reader.getFormattedErrorMessages();
+              << reader.getFormattedErrorMessages();
     return (-1);
   }
 
@@ -366,8 +367,13 @@ int main(int argc, char** argv) {
       a = new IsotropicVolumeSource(item,
                                     dynamic_cast<Solid*>(geometries[insideof]));
 
+    } else if (item["type"] == "ZemaxRayfile") {
+      cout << "Zemax ray source" << endl;
+      a = new ZemaxRaySource(item, dynamic_cast<Solid*>(geometries[insideof]));
+
     } else {
-      cout << item << endl << "Type not supported!" << endl;
+      cout << item << endl << "Source type not supported!" << endl;
+      exit(-1);
     }
 
     // Add object to array.

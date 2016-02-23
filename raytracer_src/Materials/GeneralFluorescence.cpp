@@ -24,7 +24,6 @@ GeneralFluorescence::GeneralFluorescence(Json::Value jsonData)
   checkRequiredJSONParam(jsonData, "saveAbsorptionDistribution", this);
   checkRequiredJSONParam(jsonData, "phosphorEfficiencies", this);
   checkRequiredJSONParam(jsonData, "numberOfFluorescentParticles", this);
-  checkRequiredJSONParam(jsonData, "exAndEmDataOffsets", this);
   checkRequiredJSONParam(jsonData, "multipleFluorescence", this);
 
   if (jsonData["saveAbsorptionDistribution"].asBool()) {
@@ -50,7 +49,6 @@ GeneralFluorescence::GeneralFluorescence(Json::Value jsonData)
     offsets.push_back(items[i].asUInt());
   }
 
-  unsigned int j = 0;
   Json::Value em_items = jsonData["cumulativeEmissionSpectrumFilenames"];
   Json::Value ex_items = jsonData["excitationSpectrumFilenames"];
   Json::Value abs_items = jsonData["absorptionSpectrumFilenames"];
@@ -58,8 +56,7 @@ GeneralFluorescence::GeneralFluorescence(Json::Value jsonData)
   Json::Value effs = jsonData["phosphorEfficiencies"];
   cout << "Loading emission and excitation data.. " << endl;
 
-  for (unsigned int i = 0; i < offsets.size(); ++i) {
-    for (; j < offsets[i]; ++j) {
+  for (unsigned int i = 0; i < numberOfFluorescentParticles; ++i) {
       // Load ex and em
       mat ex;
       vec em;
@@ -83,7 +80,6 @@ GeneralFluorescence::GeneralFluorescence(Json::Value jsonData)
       _absorptionWavelengths.push_back(new vec(abs.col(0)));
       _absorptionIntensities.push_back(new vec(abs.col(1)));
       phosphorEfficiencies.push_back(effs[i].asDouble());
-    }
   }
 
   cout << "Loading done!" << endl;

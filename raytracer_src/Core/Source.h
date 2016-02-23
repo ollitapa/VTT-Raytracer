@@ -73,12 +73,12 @@ class Source {
    */
   void _initialiseRay(Ray& r);
 
- private:
-
+  mutex _initMutex;
   uint64_t _rayIdx;
   double _raysPerWave;
   size_t _waveSize;
-  mutex _initMutex;
+
+
 };
 
 #endif /* SOURCE_H_ */
