@@ -70,6 +70,7 @@ def particlesInVolumeLogNormWeight(weight_frac, density_p, density_host,
 def particlesInVolumeLogNormWeightTotal(weight_frac, density_p, density_host,
                                         mu, sigma, particle_diameters):
     '''
+    IF ONLY 1 PARTICLE TYPE IN SILICONE!
     Returns the total number of particles in volume element.
     Presumes LogNormal particle distribution
     '''
@@ -79,6 +80,23 @@ def particlesInVolumeLogNormWeightTotal(weight_frac, density_p, density_host,
                                                density_host / density_p - 1))
     print('Volume fraction is %.1f %%' % (vol_frac * 100))
     return(particlesInVolumeLogNormTotal(vol_frac, mu, sigma,
+                                         particle_diameters))
+
+def particlesInVolumeLogNormWeightTotal2(weight_frac1, weight_frac2, dens_p1, dens_p2, dens_host, mu, sigma, particle_diameters):
+    '''
+    IF 2 PARTICLE TYPES IN SILICONE!
+    Returns the total number of particles in volume element
+    and the volume fraction.
+    Presumes LogNormal particle distribution
+    '''
+    print('Weight fraction is %.1f %%' % (weight_frac1 * 100))
+    w_p1 = weight_frac1
+    w_p2 = weight_frac2
+    w_s = 1.0 - w_p1 - w_p2
+
+    vol_frac = (dens_host * dens_p2 * w_p1) / (w_s * dens_p1 * dens_p2 + w_p1 *dens_host * dens_p2 + w_p2 * dens_host * dens_p1)
+    print('Volume fraction is %.1f %%' % (vol_frac * 100))
+    return(vol_frac, particlesInVolumeLogNormTotal(vol_frac, mu, sigma,
                                          particle_diameters))
 
 
